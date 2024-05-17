@@ -1,0 +1,89 @@
+newmtl MATERIAL_NO_MATERIAL
+illum 7
+Kd 0.733333 0.733333 0.733333
+adobe_interior_color 1 1 1
+Ni 1.5
+adobe_density 0
+Tr 0
+d 1
+Ka 0 0 0
+Ke 1 1 1
+Pm 0
+adobe_translucence 0
+Pr 0.298039
+Ns 16
+Ks 1 1 1
+adobe_glow 0
+
+newmtl MATERIAL_MAT_0
+illum 7
+Kd 0.733333 0.733333 0.733333
+adobe_interior_color 1 1 1
+Ni 1.5
+adobe_density 0
+Tr 0
+d 1
+Ka 0 0 0
+Ke 1 1 1
+Pm 0
+adobe_translucence 0
+Pr 0.298039
+Ns 16
+Ks 1 1 1
+adobe_glow 0
+
+newmtl MATERIAL_MAT_1
+illum 7
+Kd 0.5 0.5 0.5
+adobe_interior_color 1 1 1
+Ni 1.5
+adobe_density 0
+Tr 0
+d 1
+Ka 0 0 0
+Ke 1 1 1
+Pm 0
+adobe_translucence 0
+Pr 0.298039
+Ns 16
+Ks 1 1 1
+adobe_glow 0
+map_Kd Untitled/MATERIAL_MAT_1_base_color.png
+
+newmtl MATERIAL_MAT_2
+illum 7
+Kd 0.5 0.5 0.5
+adobe_interior_color 1 1 1
+Ni 1.5
+adobe_density 0
+Tr 0
+d 1
+Ka 0 0 0
+Ke 1 1 1
+Pm 0
+adobe_translucence 0
+Pr 0.298039
+Ns 16
+Ks 1 1 1
+adobe_glow 0
+map_Kd Untitled/MATERIAL_MAT_2_base_color.png
+norm Untitled/MATERIAL_MAT_2_normal.png
+
+newmtl MATERIAL_GENERATEDMAT4
+illum 7
+Kd 0.5 0.5 0.5
+adobe_interior_color 1 1 1
+Ni 1.5
+adobe_density 0
+Tr 0
+d 1
+Ka 0 0 0
+Ke 1 1 1
+Pm 0
+adobe_translucence 0
+map_Pr Untitled/MATERIAL_GENERATEDMAT4_roughness.png
+Ns 16
+Ks 1 1 1
+adobe_glow 0
+map_Kd Untitled/MATERIAL_GENERATEDMAT4_base_color.png
+norm Untitled/MATERIAL_GENERATEDMAT4_normal.png
