@@ -197,6 +197,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2006647849894900734, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1113767449}
+    - targetCorrespondingSourceObject: {fileID: 2006647849894900734, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1113767435}
     - targetCorrespondingSourceObject: {fileID: 2006647849894900734, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
@@ -207,10 +210,13 @@ PrefabInstance:
       addedObject: {fileID: 1113767436}
     - targetCorrespondingSourceObject: {fileID: 2006647849894900734, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1113767443}
+      addedObject: {fileID: 1113767442}
     - targetCorrespondingSourceObject: {fileID: 2006647849894900734, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1113767442}
+      addedObject: {fileID: 1113767450}
+    - targetCorrespondingSourceObject: {fileID: 2006647849894900734, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1113767448}
   m_SourcePrefab: {fileID: 100100000, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
 --- !u!1 &385249515
 GameObject:
@@ -618,7 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f83a409109980064389afaec8d6d36fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1113767443
+--- !u!114 &1113767448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -627,11 +633,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 1113767428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cfd6d4f75d742c4eb8c5d32abc565ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 9eb9d9c6d2bf3c643b3715f9046535b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  jumpForce: 100
+  OnWeaponChange:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1113767449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113767428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51c67b5536d5bd4d944e546b777df9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1113767450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113767428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1214a4bf36b7a854784c260201520e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  jumpForce: 5
   rotationSpeed: 100
   OnRunForward:
     m_PersistentCalls:
@@ -646,6 +682,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnIdle:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWeaponChange:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttack:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1334154248

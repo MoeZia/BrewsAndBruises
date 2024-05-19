@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private AnimationController animationController;
-    private MovementController movementController;
+    private InputController inputController;
+    private CombatController combatController;
     private Health health;
 
     private string playerID;
@@ -12,53 +13,67 @@ public class PlayerController : MonoBehaviour
     {
         animationController = GetComponent<AnimationController>();
         health = GetComponent<Health>();
-        movementController = GetComponent<MovementController>();
+        inputController = GetComponent<InputController>();
+        combatController = GetComponent<CombatController>();
 
         health.Initialize(100);
         playerID = health.GetID();
         health.OnHealthChanged.AddListener(OnHealthChanged);
         health.OnDeath.AddListener(OnDeath);
 
-        movementController.Initialize();
-        movementController.OnRunForward.AddListener(RunForward);
-        movementController.OnRotateLeft.AddListener(RotateLeft);
-        movementController.OnRotateRight.AddListener(RotateRight);
-        movementController.OnJump.AddListener(Jump);
-        movementController.OnIdle.AddListener(Idle);
+        inputController.Initialize();
+        inputController.OnRunForward.AddListener(RunForward);
+        inputController.OnRotateLeft.AddListener(RotateLeft);
+        inputController.OnRotateRight.AddListener(RotateRight);
+        inputController.OnJump.AddListener(Jump);
+        inputController.OnIdle.AddListener(Idle);
+        inputController.OnWeaponChange.AddListener(HandleWeaponChange);
+        inputController.OnAttack.AddListener(PerformAttack);
+
+        animationController.RegisterAnimation("RunForward", false);
+        animationController.RegisterAnimation("RotateLeft", false);
+        animationController.RegisterAnimation("RotateRight", false);
+        animationController.RegisterAnimation("Jump", true);
+        animationController.RegisterAnimation("Idle", false);
+        animationController.RegisterAnimation("Fist", true);
+        animationController.RegisterAnimation("Trumpet", true);
     }
 
     void RunForward()
     {
-        if(animationController.IsInAnimationState("JumpWhileRunning") && !animationController.IsAnimationFinished())
+        if (animationController.IsInAnimationState("JumpWhileRunning") && !animationController.IsAnimationFinished())
         {
             return;
-        }else {
+        }
+        else
+        {
             animationController.TriggerAnimation("RunForward");
         }
     }
 
     void RotateLeft()
     {
-        
+       
     }
 
     void RotateRight()
     {
-       
+        
     }
 
     void Jump()
     {
         animationController.TriggerAnimation("JumpWhileRunning");
-        // Additional jump logic can be added here if necessary
     }
 
     void Idle()
     {
-        if(animationController.IsInAnimationState("JumpWhileRunning") && !animationController.IsAnimationFinished())
+        if (animationController.IsInAnimationState("JumpWhileRunning") && !animationController.IsAnimationFinished())
         {
             return;
-        }else {
+        }
+        else
+        {
             animationController.TriggerAnimation("Idle");
         }
     }
@@ -76,5 +91,29 @@ public class PlayerController : MonoBehaviour
     private void OnDeath(string id)
     {
         Debug.Log("Player with ID " + id + " died");
+    }
+
+    private void HandleWeaponChange(CombatModel.WeaponType weapon)
+    {
+        Debug.Log("Weapon changed to: " + weapon);
+    }
+
+    private void PerformAttack()
+    {
+        if (!animationController.IsAnimationBlocking())
+        {
+            switch (combatController.GetCurrentWeapon())
+            {
+                case CombatModel.WeaponType.Fist:
+                    animationController.TriggerAnimation("Fist");
+                    break;
+                case CombatModel.WeaponType.Trumpet:
+                    animationController.TriggerAnimation("Trumpet");
+                    break;
+            }
+
+            //combatController.PerformAttack();
+            Debug.Log("Performed attack.");
+        }
     }
 }
