@@ -357,6 +357,10 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.18f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/Classes/GameState.cs"
 "Assets/Scripts/Controller/Animation Controller.cs"
+"Assets/Scripts/Controller/EnemyController.cs"
+"Assets/Scripts/Controller/MovementController.cs"
+"Assets/Scripts/Controller/PlayerController.cs"
+"Assets/Scripts/Health.cs"
 "Assets/Scripts/MoveCharacterScript.cs"
 "Assets/Scripts/View/AnimationView.cs"
 -langversion:9.0

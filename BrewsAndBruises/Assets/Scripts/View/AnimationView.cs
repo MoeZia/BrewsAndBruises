@@ -25,4 +25,10 @@ public class AnimationView : MonoBehaviour
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         return stateInfo.IsName(stateName);
     }
+
+    public bool IsAnimationFinished()
+    {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.normalizedTime >= 1f && !animator.IsInTransition(0);
+    }
 }

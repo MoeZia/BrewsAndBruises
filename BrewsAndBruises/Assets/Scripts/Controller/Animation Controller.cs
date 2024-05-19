@@ -26,4 +26,9 @@ public class AnimationController : MonoBehaviour
     {
         return animationView.IsInAnimationState(stateName);
     }
+
+    public bool IsAnimationFinished()
+    {
+        return animationView.IsAnimationFinished();
+    }
 }
