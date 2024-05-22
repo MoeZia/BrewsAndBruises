@@ -11,6 +11,9 @@ scopes = {
 	"last_search.E8DA15E5" = ""
 	"OpenInspectorPreview.E8DA15E5" = "0"
 	"currentGroup.E8DA15E5" = "all"
+	"last_search.975ECEF6" = ""
+	"OpenInspectorPreview.975ECEF6" = "0"
+	"currentGroup.975ECEF6" = "all"
 }
 providers = {
 	packages = {
@@ -62,6 +65,14 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	""
+	"h: t=Mes"
+	"h: t=MeshFilter "
+	"h: t=MeshFilter vertices>=1024"
+	"p: t:t"
+	"p: t:texture´´"
+	"p: t:texture"
+	"p:"
 ]
 searchItemFavorites = [
 ]
