@@ -17,7 +17,12 @@ public class AnimationView : MonoBehaviour
     public string GetCurrentAnimationState()
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        return animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+        var currentClips = animator.GetCurrentAnimatorClipInfo(0);
+        if (currentClips.Length > 0)
+        {
+            return currentClips[0].clip.name;
+        }
+        return string.Empty; // Return an empty string if no animation clip is found
     }
 
     public bool IsInAnimationState(string stateName)

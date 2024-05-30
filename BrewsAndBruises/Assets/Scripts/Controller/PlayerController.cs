@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleWeaponChange(CombatModel.WeaponType weapon)
     {
+        combatController.HandleWeaponChange(weapon);
         Debug.Log("Weapon changed to: " + weapon);
     }
 
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour
                     break;
             }
 
-            //combatController.PerformAttack();
+            combatController.PerformAttack();
             Debug.Log("Performed attack.");
         }
     }
