@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
             }
 
             combatController.PerformAttack();
-            Debug.Log("Performed attack.");
+           // Debug.Log("Performed attack.");
         }
     }
 }
