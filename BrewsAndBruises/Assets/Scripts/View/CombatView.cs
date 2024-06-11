@@ -4,6 +4,8 @@ public class CombatView : MonoBehaviour
 {
     private AnimationController animationController;
 
+    
+
     void Start()
     {
         animationController = GetComponent<AnimationController>();

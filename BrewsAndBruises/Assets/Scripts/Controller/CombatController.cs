@@ -12,8 +12,12 @@ public class CombatController : MonoBehaviour
 
     private CombatModel combatModel;
 
+    private Health enemyHealth;
+
     bool isAttacking = false;
     float delta = 0;
+
+    int currDamage;
 
     void Start()
     {
@@ -64,6 +68,7 @@ public class CombatController : MonoBehaviour
     public void PerformAttack()
     {
         CombatModel.WeaponType currentWeapon = combatModel.GetCurrentWeapon();
+        currDamage = combatModel.GetDamage();
         // set bool attacking to true for the animation
 
         isAttacking = true;
@@ -79,17 +84,21 @@ public class CombatController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+      
         if (other.CompareTag("Enemy"))
         {
             Debug.Log("Enemy hit!");
 
             // Apply physics effects to the enemy
             Rigidbody enemyRb = other.GetComponent<Rigidbody>();
+            enemyHealth = other.GetComponent<Health>();
+
             //aply force only if input was given -- public UnityEvent OnAttack;
             if(isAttacking)
             {
                 ApplyForce(enemyRb);
-                Debug.Log("Applying force to enemy"+enemyRb.name);
+                enemyHealth.TakeDamage(currDamage);
+                Debug.Log("Applying force to enemy"+enemyRb.name+" and Damage "+currDamage);
             }
             //ApplyForce(enemyRb);
         }
