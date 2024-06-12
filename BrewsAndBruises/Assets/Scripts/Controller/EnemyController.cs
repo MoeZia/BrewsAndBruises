@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class EnemyController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class EnemyController : MonoBehaviour
 
     private Transform player;
     private NavMeshAgent agent;
+    private Rigidbody rb;
+    private Animator animator;
     private float timer;
     private Vector3 wanderPoint;
 
@@ -17,6 +20,14 @@ public class EnemyController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
+        //animator = GetComponent<Animator>();
+
+        if (rb == null) {
+            rb = gameObject.AddComponent<Rigidbody>();
+        }
+
+        rb.isKinematic = true; // Start with Rigidbody in kinematic mode if using NavMesh
         timer = wanderTimer;
         SetNewWanderPoint();
     }
@@ -45,32 +56,86 @@ public class EnemyController : MonoBehaviour
     }
 
     void Wander()
+{
+    timer += Time.deltaTime;
+
+    if (timer >= wanderTimer)
     {
-        timer += Time.deltaTime;
-
-        if (timer >= wanderTimer)
-        {
-            SetNewWanderPoint();
-            timer = 0;
-        }
-
-        agent.SetDestination(wanderPoint);
-
-        if (Vector3.Distance(transform.position, wanderPoint) <= 1f)
-        {
-            timer = wanderTimer;
-        }
+        SetNewWanderPoint();
+        timer = 0;
     }
+
+    // Check if the agent is enabled and on the NavMesh before setting a new destination
+    if (agent.enabled && agent.isOnNavMesh)
+    {
+        agent.SetDestination(wanderPoint);
+    }
+
+    // If the agent reaches the wander point (or nearly so), reset the timer
+    if (Vector3.Distance(transform.position, wanderPoint) <= 1f)
+    {
+        timer = wanderTimer;
+    }
+}
+
 
     void ChasePlayer()
+{
+    if (agent.enabled && agent.isOnNavMesh)
     {
         agent.speed = chaseSpeed;
+        agent.stoppingDistance = 2.0f;  
         agent.SetDestination(player.position);
     }
+}
 
-    void OnDrawGizmosSelected()
+
+    public void ApplyPushback(Vector3 force)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, lookRadius);
+        agent.enabled = false;
+        rb.isKinematic = false;
+        rb.AddForce(force, ForceMode.Impulse);
+        //animator.SetTrigger("Knockdown");
+        StartCoroutine(StandUpRoutine());
+    }
+
+    private IEnumerator StandUpRoutine()
+    {
+        yield return new WaitForSeconds(1.5f); // Delay while knocked down
+        //animator.SetTrigger("StandUp");
+        yield return new WaitForSeconds(1.0f); // Delay for stand up animation
+        yield return new WaitForSeconds(0.5f); // Additional delay before reactivating NavMeshAgent
+        ReenableNavMeshAgent();
+    }
+
+    private void ReenableNavMeshAgent()
+{
+    // Find a valid NavMesh position close to the current position and only then enable the agent
+    NavMeshHit hit;
+    if (NavMesh.SamplePosition(transform.position, out hit, 2.0f, NavMesh.AllAreas))
+    {
+        rb.isKinematic = true; // Switch Rigidbody back to kinematic
+        transform.position = hit.position; // Relocate to a valid NavMesh position
+        agent.enabled = true; // Re-enable the agent
+    }
+    else
+    {
+        Debug.LogError("Failed to find a valid NavMesh position near " + transform.position);
+    }
+}
+
+
+    private Vector3 FindClosestNavMeshPosition()
+    {
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(transform.position, out hit, 2.0f, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+        else
+        {
+            Debug.LogError("No valid NavMesh position found near " + transform.position);
+            return Vector3.zero;
+        }
     }
 }

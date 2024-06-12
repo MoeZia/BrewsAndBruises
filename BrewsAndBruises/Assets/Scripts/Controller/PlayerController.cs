@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
         inputController.OnWeaponChange.AddListener(HandleWeaponChange);
         inputController.OnAttack.AddListener(PerformAttack);
 
+        // Register all animations with the Animation Controller
         animationController.RegisterAnimation("RunForward", false);
         animationController.RegisterAnimation("RotateLeft", false);
         animationController.RegisterAnimation("RotateRight", false);
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
         animationController.RegisterAnimation("Idle", false);
         animationController.RegisterAnimation("Fist", true);
         animationController.RegisterAnimation("Trumpet", true);
+        animationController.RegisterAnimation("Whip", true); // Assuming you add this
     }
 
     void RunForward()
@@ -45,20 +47,17 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        else
-        {
-            animationController.TriggerAnimation("RunForward");
-        }
+        animationController.TriggerAnimation("RunForward");
     }
 
     void RotateLeft()
     {
-       
+        //animationController.TriggerAnimation("RotateLeft");
     }
 
     void RotateRight()
     {
-        
+        //animationController.TriggerAnimation("RotateRight");
     }
 
     void Jump()
@@ -68,14 +67,7 @@ public class PlayerController : MonoBehaviour
 
     void Idle()
     {
-        if (animationController.IsInAnimationState("JumpWhileRunning") && !animationController.IsAnimationFinished())
-        {
-            return;
-        }
-        else
-        {
-            animationController.TriggerAnimation("Idle");
-        }
+        animationController.TriggerAnimation("Idle");
     }
 
     public void TakeDamage(int damage)
@@ -85,25 +77,42 @@ public class PlayerController : MonoBehaviour
 
     private void OnHealthChanged(string id, int currentHealth, int maxHealth)
     {
-        Debug.Log("Player Health Changed: " + currentHealth + "/" + maxHealth);
+        Debug.Log($"Player Health Changed: {currentHealth}/{maxHealth}");
     }
 
     private void OnDeath(string id)
     {
-        Debug.Log("Player with ID " + id + " died");
+        Debug.Log($"Player with ID {id} died");
     }
 
     private void HandleWeaponChange(CombatModel.WeaponType weapon)
     {
         combatController.HandleWeaponChange(weapon);
-        Debug.Log("Weapon changed to: " + weapon);
+        TriggerWeaponAnimation(weapon);
+    }
+
+    private void TriggerWeaponAnimation(CombatModel.WeaponType weapon)
+    {
+        switch (weapon)
+        {
+            case CombatModel.WeaponType.Fist:
+                animationController.TriggerAnimation("FistEquip");
+                break;
+            case CombatModel.WeaponType.Trumpet:
+                animationController.TriggerAnimation("TrumpetEquip");
+                break;
+            case CombatModel.WeaponType.Whip:
+                animationController.TriggerAnimation("WhipEquip");
+                break;
+        }
     }
 
     private void PerformAttack()
     {
         if (!animationController.IsAnimationBlocking())
         {
-            switch (combatController.GetCurrentWeapon())
+            CombatModel.WeaponType currentWeapon = combatController.GetCurrentWeapon();
+            switch (currentWeapon)
             {
                 case CombatModel.WeaponType.Fist:
                     animationController.TriggerAnimation("Fist");
@@ -111,10 +120,12 @@ public class PlayerController : MonoBehaviour
                 case CombatModel.WeaponType.Trumpet:
                     animationController.TriggerAnimation("Trumpet");
                     break;
+                case CombatModel.WeaponType.Whip:
+                    animationController.TriggerAnimation("Whip"); 
+                    break;
             }
 
             combatController.PerformAttack();
-           // Debug.Log("Performed attack.");
         }
     }
 }

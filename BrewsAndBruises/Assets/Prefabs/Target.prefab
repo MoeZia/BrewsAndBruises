@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 10
-  chaseSpeed: 5
+  chaseSpeed: 2.25
   wanderRadius: 20
   wanderTimer: 5
 --- !u!195 &8370506405873158255

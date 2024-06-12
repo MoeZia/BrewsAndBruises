@@ -1,129 +1,88 @@
-using System.Runtime.InteropServices;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CombatController : MonoBehaviour
-{
+public class CombatController : MonoBehaviour {
     public UnityEvent<CombatModel.WeaponType> OnWeaponChange = new UnityEvent<CombatModel.WeaponType>();
     public UnityEvent OnAttack = new UnityEvent();
 
-    public GameObject fist; // Reference to the fist GameObject
+    public Transform weaponsParent; // Assign this to Elbow_L in the Unity Inspector
 
     private CombatModel combatModel;
+    private Dictionary<CombatModel.WeaponType, GameObject> weaponObjects = new Dictionary<CombatModel.WeaponType, GameObject>();
 
-    private Health enemyHealth;
-
-    bool isAttacking = false;
-    float delta = 0;
-
-    int currDamage;
-
-    void Start()
-    {
-     
+    void Start() {
         combatModel = new CombatModel();
+        InitializeWeaponObjects();
         InitializeEvents();
+    }
 
-        if (fist != null)
-        {
-            // Ensure the fist has a collider and set it as a trigger
-            SphereCollider fistCollider = fist.GetComponent<SphereCollider>();
-            if (fistCollider == null)
-            {
-                // with small radius to avoid collision with other objects
-                fistCollider = fist.AddComponent<SphereCollider>();
-                fistCollider.radius = 0.05f;
-                fistCollider.isTrigger = true;
-                
-                 // Example collider
-            }
-            fistCollider.isTrigger = true;
+    private void InitializeWeaponObjects() {
+        // Assuming the names of the child GameObjects are "Fist", "Trumpet", "Whip"
+        weaponObjects[CombatModel.WeaponType.Fist] = weaponsParent.Find("Fist").gameObject;
+        weaponObjects[CombatModel.WeaponType.Trumpet] = weaponsParent.Find("Trumpet").gameObject;
+        weaponObjects[CombatModel.WeaponType.Whip] = weaponsParent.Find("Whip").gameObject;
 
+        // Set all weapons inactive initially
+        foreach (var weapon in weaponObjects.Values) {
+           // weapon.SetActive(false);
+           // SphereCollider collider = weapon.GetComponent<SphereCollider>();
+           // if (collider == null) {
+           //     collider = weapon.AddComponent<SphereCollider>();
+           //     collider.radius = 0.05f; // Set the radius as needed
+           // }
+           // collider.isTrigger = true;
         }
     }
 
-    private void InitializeEvents()
-    {
+    private void InitializeEvents() {
         OnWeaponChange.AddListener(HandleWeaponChange);
         OnAttack.AddListener(PerformAttack);
     }
-    void Update(){
-        // if isattacking = true deactivate after 1 second#
-        //Debug.Log(isAttacking);
-    
-        delta += Time.deltaTime;
-        if (delta > 1)
-        {
-            isAttacking = false;
-            delta = 0;
+
+    public void HandleWeaponChange(CombatModel.WeaponType weapon) {
+        combatModel.SetWeapon(weapon);
+        UpdateWeaponVisibility(weapon);
+    }
+
+    private void UpdateWeaponVisibility(CombatModel.WeaponType weapon) {
+        foreach (var wp in weaponObjects) {
+            wp.Value.SetActive(wp.Key == weapon);
         }
     }
 
-    public void HandleWeaponChange(CombatModel.WeaponType weapon)
-    {
-        combatModel.SetWeapon(weapon);
+    public CombatModel.WeaponType GetCurrentWeapon() {
+        return combatModel.GetCurrentWeapon();
     }
 
-    public void PerformAttack()
-    {
-        CombatModel.WeaponType currentWeapon = combatModel.GetCurrentWeapon();
-        currDamage = combatModel.GetDamage();
-        // set bool attacking to true for the animation
+    public void PerformAttack() {
+    CombatModel.WeaponType currentWeapon = GetCurrentWeapon();
+    GameObject activeWeapon = weaponObjects[currentWeapon];
+    activeWeapon.SetActive(true);  // Ensure the weapon is active
 
-        isAttacking = true;
-        Debug.Log("In Combat controller--Performing attack with weapon: " + currentWeapon);
+    // Define the radius for your attack range, adjust as necessary
+    float attackRadius = 1.0f;
+    Collider[] hitColliders = Physics.OverlapSphere(activeWeapon.transform.position, attackRadius);
 
-        // Activate the fist collider if the weapon is Fist
-        if (currentWeapon == CombatModel.WeaponType.Fist && fist != null)
-        {
-            fist.SetActive(true); // Enable the fist collider
+    foreach (var hitCollider in hitColliders) {
+        // Check if the collider is on the "Hittable" layer and tagged as "Enemy"
+        if (hitCollider.gameObject.layer == LayerMask.NameToLayer("Hittable") && hitCollider.CompareTag("Enemy")) {
+            Health enemyHealth = hitCollider.GetComponent<Health>();
+            if (enemyHealth != null) {
+                enemyHealth.TakeDamage(combatModel.GetDamage());
+                Debug.Log($"Hit {hitCollider.name}: Dealing {combatModel.GetDamage()} damage.");
+            }
+            EnemyController enemy = hitCollider.GetComponent<EnemyController>();
+            if (enemy != null) {
+        Vector3 pushDirection = (hitCollider.transform.position - transform.position).normalized;
+        float pushForce = combatModel.GetAttackForce(); // Assuming this returns the force based on the weapon
+        enemy.ApplyPushback(pushDirection * pushForce);
+    }
         }
        
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-      
-        if (other.CompareTag("Enemy"))
-        {
-            Debug.Log("Enemy hit!");
+    Debug.Log($"Attacking with {currentWeapon} dealing {combatModel.GetDamage()} damage.");
+}
 
-            // Apply physics effects to the enemy
-            Rigidbody enemyRb = other.GetComponent<Rigidbody>();
-            enemyHealth = other.GetComponent<Health>();
-
-            //aply force only if input was given -- public UnityEvent OnAttack;
-            if(isAttacking)
-            {
-                ApplyForce(enemyRb);
-                enemyHealth.TakeDamage(currDamage);
-                Debug.Log("Applying force to enemy"+enemyRb.name+" and Damage "+currDamage);
-            }
-            //ApplyForce(enemyRb);
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        // Disable the fist collider after the attack
-        if (other.CompareTag("Enemy") && fist != null)
-        {
-            //fist.SetActive(false);
-        }
-    }
-
-    public CombatModel.WeaponType GetCurrentWeapon()
-    {
-        return combatModel.GetCurrentWeapon();
-    }
-
-    public void ApplyForce(Rigidbody enemyRb){
-        if (enemyRb != null)
-            {
-                Vector3 forceDirection = enemyRb.transform.position - fist.transform.position;
-                enemyRb.AddForce(forceDirection.normalized * 500f); // Example force
-            }
-
-    }
 }
