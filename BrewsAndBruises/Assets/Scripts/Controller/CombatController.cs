@@ -82,7 +82,7 @@ public class CombatController : MonoBehaviour {
        
     }
 
-    Debug.Log($"Attacking with {currentWeapon} dealing {combatModel.GetDamage()} damage.");
+   // Debug.Log($"Attacking with {currentWeapon} dealing {combatModel.GetDamage()} damage.");
 }
 
 }

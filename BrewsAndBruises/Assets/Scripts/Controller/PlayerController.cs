@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private AnimationController animationController;
-    private InputController inputController;
+    private InputControllerDiab inputController;
     private CombatController combatController;
     private Health health;
 
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     {
         animationController = GetComponent<AnimationController>();
         health = GetComponent<Health>();
-        inputController = GetComponent<InputController>();
+        inputController = GetComponent<InputControllerDiab>();
         combatController = GetComponent<CombatController>();
 
         health.Initialize(100);
