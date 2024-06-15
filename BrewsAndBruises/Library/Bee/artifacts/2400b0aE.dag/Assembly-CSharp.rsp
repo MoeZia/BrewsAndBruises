@@ -372,6 +372,8 @@
 "Assets/Scripts/MoveCharacterScript.cs"
 "Assets/Scripts/View/AnimationView.cs"
 "Assets/Scripts/View/CombatView.cs"
+"Assets/Scripts/WeaponUI.cs"
+"Assets/Scripts/WeaponUIController.cs"
 -langversion:9.0
 
 /deterministic
