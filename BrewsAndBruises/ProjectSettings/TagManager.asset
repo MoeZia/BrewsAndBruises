@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - HealthBar
+  - WIP
+  - Beer
+  - Weapon
   layers:
   - Default
   - TransparentFX
