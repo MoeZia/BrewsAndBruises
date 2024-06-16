@@ -398,8 +398,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 10
-  chaseSpeed: 2.12
-  wanderRadius: 20
+  chaseSpeed: 2
+  wanderRadius: 10
   wanderTimer: 5
   attackRange: 2
 --- !u!114 &5924591458972087442
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90440ebdd9ca1694ebbe666d40427d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 30
   id: 
   OnHealthChanged:
     m_PersistentCalls:

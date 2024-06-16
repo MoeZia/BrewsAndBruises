@@ -8468,9 +8468,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fccfcc9169278634ba61249f05baeba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 827875243}
   speed: 10
-  rotationSpeed: 360
+  rotationSpeed: 0
 --- !u!1001 &1208121383
 PrefabInstance:
   m_ObjectHideFlags: 0

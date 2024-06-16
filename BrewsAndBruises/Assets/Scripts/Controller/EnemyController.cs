@@ -12,16 +12,15 @@ public class EnemyController : MonoBehaviour
     private Transform player;
     private NavMeshAgent agent;
     private Rigidbody rb;
-    private Animator animator;
-    private float timer;
-    private Vector3 wanderPoint;
     private AnimationController animationController;
     private Health health;
 
     public float attackRange = 2.0f; // Range within which the enemy can attack
-private float attackCooldown = 4.0f; // Minimum time between attacks
-private float lastAttackTime = -4.0f; // Initialize to enable immediate attack
+    private float attackCooldown = 4.0f; // Minimum time between attacks
+    private float lastAttackTime = -4.0f; // Initialize to enable immediate attack
 
+    private Vector3 wanderPoint; // Point to wander to
+    private float timer; // Timer for wandering
 
     void Start()
     {
@@ -32,7 +31,7 @@ private float lastAttackTime = -4.0f; // Initialize to enable immediate attack
         health = GetComponent<Health>();
         animationController.RegisterAnimation("Walking", false);
         animationController.RegisterAnimation("Attack", true);
-        animationController.RegisterAnimation("BeeingHit", true);
+        animationController.RegisterAnimation("BeingHit", true);
 
         if (rb == null) {
             rb = gameObject.AddComponent<Rigidbody>();
@@ -42,40 +41,20 @@ private float lastAttackTime = -4.0f; // Initialize to enable immediate attack
         timer = wanderTimer;
         SetNewWanderPoint();
     }
-    void OnDrawGizmosSelected()
-{
-    // Use this to visualize the attack range in the editor
-    Gizmos.color = Color.red;
-    Gizmos.DrawWireSphere(transform.position, attackRange);
-}
 
     void Update()
     {
         float distance = Vector3.Distance(player.position, transform.position);
-
-        // Check for players within attack range using Physics.OverlapSphere
-    Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
-    foreach (var hitCollider in hitColliders)
-    {
-        if (hitCollider.CompareTag("Player") && Time.time > lastAttackTime + attackCooldown)
-        {
-            AttackPlayer(hitCollider); // Call your attack function
-            lastAttackTime = Time.time; // Reset attack timer
-            break; // Assuming only one player, break after attacking
-        }
-    }
-        
         if(animationController.IsInAnimationState("Attack") && animationController.IsAnimationFinished())
-        {
-           //Debug.Log("Walking");
-           animationController.TriggerAnimation("Walking");
-        }
-        if( animationController.IsAnimationFinished())
-        {
-           //Debug.Log("Walking");
-           animationController.TriggerAnimation("Walking");
-        }
-
+    {
+       //Debug.Log("Walking");
+       animationController.TriggerAnimation("Walking");
+    }
+    if( animationController.IsAnimationFinished())
+    {
+       //Debug.Log("Walking");
+       animationController.TriggerAnimation("Walking");
+    }
 
         if (distance <= lookRadius)
         {
@@ -84,6 +63,27 @@ private float lastAttackTime = -4.0f; // Initialize to enable immediate attack
         else
         {
             Wander();
+        }
+    }
+
+    void Wander()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= wanderTimer)
+        {
+            SetNewWanderPoint();
+            timer = 0;
+        }
+
+        if (agent.enabled && agent.isOnNavMesh)
+        {
+            agent.SetDestination(wanderPoint);
+        }
+
+        if (Vector3.Distance(transform.position, wanderPoint) <= 1f)
+        {
+            timer = wanderTimer; // Reset the timer when the destination is reached
         }
     }
 
@@ -96,97 +96,87 @@ private float lastAttackTime = -4.0f; // Initialize to enable immediate attack
         wanderPoint = navHit.position;
     }
 
-    void Wander()
-{
-    timer += Time.deltaTime;
-
-    if (timer >= wanderTimer)
-    {
-        SetNewWanderPoint();
-        timer = 0;
-    }
-
-    // Check if the agent is enabled and on the NavMesh before setting a new destination
-    if (agent.enabled && agent.isOnNavMesh)
-    {
-        agent.SetDestination(wanderPoint);
-    }
-
-    // If the agent reaches the wander point (or nearly so), reset the timer
-    if (Vector3.Distance(transform.position, wanderPoint) <= 1f)
-    {
-        timer = wanderTimer;
-    }
-}
-
-
     void ChasePlayer()
-
-{
-    
-    if (agent.enabled && agent.isOnNavMesh)
     {
-        agent.speed = chaseSpeed;
-        agent.stoppingDistance = 2.0f;  
-        agent.SetDestination(player.position);
+        if (agent.enabled && agent.isOnNavMesh)
+        {
+            agent.speed = chaseSpeed;
+            agent.stoppingDistance = 2.0f;
+            agent.SetDestination(player.position);
+
+            // When close to the player, start the attack sequence
+            if (Vector3.Distance(transform.position, player.position) <= attackRange)
+            {
+                StartCoroutine(AttackSequence());
+            }
+        }
     }
-}
 
+    private IEnumerator AttackSequence()
+    {
+        agent.isStopped = true; // Stop the agent from moving
+        animationController.TriggerAnimation("Attack"); // adding attack so he can also miss the player and not just hit him all the time
+        yield return new WaitForSeconds(2); // Wait for 2 seconds before checking and attacking
 
-    public void ApplyPushback(Vector3 force)
+        // Check for the player within attack range using Physics.OverlapSphere
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Player") && Time.time > lastAttackTime + attackCooldown)
+            {
+                AttackPlayer(hitCollider); // Perform the attack
+                lastAttackTime = Time.time; // Reset the attack timer
+                break; // Assuming only one player, break after attacking
+            }
+        }
+
+        agent.isStopped = false; // Allow the agent to resume moving
+    }
+
+    private void AttackPlayer(Collider playerCollider)
+    {
+        //animationController.TriggerAnimation("Attack");
+        playerCollider.GetComponent<Health>().TakeDamage(10); // Example damage value
+    }
+
+   public void ApplyPushback(Vector3 force)
     {
         agent.enabled = false;
         rb.isKinematic = false;
-        animationController.TriggerAnimation("BeeingHit");
         rb.AddForce(force, ForceMode.Impulse);
-        //animator.SetTrigger("Knockdown");
-        StartCoroutine(StandUpRoutine());
+        StartCoroutine(RecoverFromPushback());
     }
 
-    private IEnumerator StandUpRoutine()
+    private IEnumerator RecoverFromPushback()
     {
-        yield return new WaitForSeconds(1.5f); // Delay while knocked down
-        //animator.SetTrigger("StandUp");
-        yield return new WaitForSeconds(1.0f); // Delay for stand up animation
-        yield return new WaitForSeconds(0.5f); // Additional delay before reactivating NavMeshAgent
+        yield return new WaitForSeconds(1.5f); // Wait for the effects of the pushback to dissipate
+
+        // Optionally add logic to recover posture or re-engage in combat
+        animationController.TriggerAnimation("BeingHit"); // Assuming you have a recovery or being hit animation
+
+        yield return new WaitForSeconds(0.5f); // Additional recovery time
+
         ReenableNavMeshAgent();
     }
 
     private void ReenableNavMeshAgent()
-{
-    // Find a valid NavMesh position close to the current position and only then enable the agent
-    NavMeshHit hit;
-    if (NavMesh.SamplePosition(transform.position, out hit, 2.0f, NavMesh.AllAreas))
     {
-        rb.isKinematic = true; // Switch Rigidbody back to kinematic
-        transform.position = hit.position; // Relocate to a valid NavMesh position
-        agent.enabled = true; // Re-enable the agent
-    }
-    else
-    {
-        Debug.LogError("Failed to find a valid NavMesh position near " + transform.position);
-    }
-}
-
-
-    private Vector3 FindClosestNavMeshPosition()
-    {
+        // Check if the position is still on the NavMesh
         NavMeshHit hit;
         if (NavMesh.SamplePosition(transform.position, out hit, 2.0f, NavMesh.AllAreas))
         {
-            return hit.position;
+            transform.position = hit.position; // Ensure the enemy is back on the NavMesh
+            agent.enabled = true; // Reactivate the NavMeshAgent
+            rb.isKinematic = true; // Return Rigidbody to kinematic mode for NavMeshAgent control
         }
         else
         {
-            Debug.LogError("No valid NavMesh position found near " + transform.position);
-            return Vector3.zero;
+            Debug.LogError("Failed to find a valid NavMesh position near " + transform.position);
+            // Optionally include logic to handle cases where no valid NavMesh position is found
         }
     }
-
-    private void AttackPlayer(Collider enemy)
-    {
-        //animator.SetTrigger("Attack");
-        enemy.GetComponent<Health>().TakeDamage(10); // Assuming 10 damage per attack
-        animationController.TriggerAnimation("Attack");
-    }
 }
+
+
+
+
