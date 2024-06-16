@@ -75,7 +75,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 102
+  controlID: 103
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -121,8 +121,8 @@ MonoBehaviour:
     y: 0
     width: 576
     height: 662
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 57
+  controlID: 47
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -321,7 +321,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -329,16 +329,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\morit\Documents\GitHub\BrewsAndBruises\BrewsAndBruises
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 63}
-    m_SelectedIDs: 60670000
-    m_LastClickedID: 26464
-    m_ExpandedIDs: 00000000386700003a6700003c6700003e670000406700004267000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 68}
+    m_SelectedIDs: 40670000
+    m_LastClickedID: 26432
+    m_ExpandedIDs: 0000000036670000386700003a6700003c6700003e6700004067000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -366,7 +366,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000386700003a6700003c6700003e6700004067000042670000
+    m_ExpandedIDs: 0000000036670000386700003a6700003c6700003e67000040670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -505,10 +505,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 452}
-      m_SelectedIDs: 965d0000
-      m_LastClickedID: 23958
-      m_ExpandedIDs: 5ceefeff24fcfeff1ef2ffff2cf2ffffeaf2ffffeef2fffff2f2ffff3af3ffff3ef3ffff42f3ffff6ef3ffff72f3ffff24fbfffff45b0000765c0000d85d0000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 945d0000
+      m_LastClickedID: 23956
+      m_ExpandedIDs: 30fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -596,7 +596,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-scene-view-toolbar
@@ -622,7 +622,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -953,9 +953,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 40.91904, y: -0.9953733, z: 164.27956}
+    m_Target: {x: 15.328588, y: 4.6757793, z: 168.48898}
     speed: 2
-    m_Value: {x: 40.91904, y: -0.9953733, z: 164.27956}
+    m_Value: {x: 15.328588, y: 4.6757793, z: 168.48898}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1001,13 +1001,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.22189061, y: 0.4773243, z: -0.12595674, w: 0.84087104}
+    m_Target: {x: 0.17739567, y: 0.6367754, z: -0.15380627, w: 0.7344356}
     speed: 2
-    m_Value: {x: 0.22189027, y: 0.47732356, z: -0.12595655, w: 0.8408697}
+    m_Value: {x: 0.17739531, y: 0.63677406, z: -0.15380596, w: 0.7344341}
   m_Size:
-    m_Target: 11.854645
+    m_Target: 25.98889
     speed: 2
-    m_Value: 11.854645
+    m_Value: 25.98889
   m_Ortho:
     m_Target: 0
     speed: 2

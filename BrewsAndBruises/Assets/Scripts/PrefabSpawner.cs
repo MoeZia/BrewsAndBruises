@@ -25,7 +25,7 @@ public class PrefabSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnGridAtPoint(int dimension, Vector3 specifiedSpawnPoint, GameObject prefab)
+    public void SpawnGridAtPoint(int dimension, Vector3 specifiedSpawnPoint, GameObject prefab)
     {
         float offset = 1.0f; // Spacing between prefabs
         Vector3 startPosition = specifiedSpawnPoint - new Vector3(dimension / 2.0f * offset, 0, dimension / 2.0f * offset);
@@ -40,7 +40,21 @@ public class PrefabSpawner : MonoBehaviour
         }
     }
 
-    #if UNITY_EDITOR
+    // Public function to allow external control over prefab spawning
+    public void SpawnPrefabGridFromIndex(int index, int dimension, Vector3 spawnPt)
+    {
+        if (index >= 0 && index < prefabsToSpawn.Count)
+        {
+            GameObject selectedPrefab = prefabsToSpawn[index];
+            SpawnGridAtPoint(dimension, spawnPt, selectedPrefab);
+        }
+        else
+        {
+            Debug.LogError("Prefab index out of range.");
+        }
+    }
+
+#if UNITY_EDITOR
     [CustomEditor(typeof(PrefabSpawner))]
     public class PrefabSpawnerEditor : Editor
     {
@@ -55,5 +69,5 @@ public class PrefabSpawner : MonoBehaviour
             }
         }
     }
-    #endif
+#endif
 }

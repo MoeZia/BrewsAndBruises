@@ -61,7 +61,7 @@ public class CombatController : MonoBehaviour {
     activeWeapon.SetActive(true);  // Ensure the weapon is active
 
     // Define the radius for your attack range, adjust as necessary
-    float attackRadius = 1.5f;
+    float attackRadius = 2.5f;
     Collider[] hitColliders = Physics.OverlapSphere(activeWeapon.transform.position, attackRadius);
 
     foreach (var hitCollider in hitColliders) {
