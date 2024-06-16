@@ -27,10 +27,6 @@ public class WeaponUIController : MonoBehaviour
                 if(currentWeapon == CombatModel.WeaponType.Breze && ui.weaponType == CombatModel.WeaponType.Breze) {
                     weapon.GetComponent<WeaponUI>().setTexture(1);
                 }
-            
-                if(currentWeapon == CombatModel.WeaponType.Whip && ui.weaponType == CombatModel.WeaponType.Breze) {
-                    weapon.GetComponent<WeaponUI>().setTexture(1);
-                }
             }
         }
         
