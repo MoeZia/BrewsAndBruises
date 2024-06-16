@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 public class EndOfGameMenuScript : MonoBehaviour
 { 
     public GameObject gameOverMenu;
@@ -14,6 +16,7 @@ public class EndOfGameMenuScript : MonoBehaviour
 
 
     public void ActivateMenu() {
+
        gameOverMenu.SetActive(true);
         Time.timeScale = 0f;
     }
@@ -25,5 +28,9 @@ public class EndOfGameMenuScript : MonoBehaviour
     public void BackToMenu() {
         SceneManager.LoadScene("GameMenu");
         
+    }
+
+    public void setHeadLine(string text) {
+        gameOverMenu.GetComponentInChildren<TMP_Text>().text = text;
     }
 }

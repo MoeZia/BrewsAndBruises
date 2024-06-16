@@ -83,6 +83,10 @@ public class PlayerController : MonoBehaviour
     private void OnDeath(string id)
     {
         Debug.Log($"Player with ID {id} died");
+        GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
+        GameObject eventSystem = GameObject.Find("EventSystem");
+        eventSystem.GetComponent<EndOfGameMenuScript>().ActivateMenu();
+        eventSystem.GetComponent<EndOfGameMenuScript>().setHeadLine("You Los");
     }
 
     private void HandleWeaponChange(CombatModel.WeaponType weapon)
