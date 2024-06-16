@@ -18,6 +18,10 @@ public class EnemyController : MonoBehaviour
     private AnimationController animationController;
     private Health health;
 
+    public float attackRange = 2.0f; // Range within which the enemy can attack
+private float attackCooldown = 4.0f; // Minimum time between attacks
+private float lastAttackTime = -4.0f; // Initialize to enable immediate attack
+
 
     void Start()
     {
@@ -38,10 +42,28 @@ public class EnemyController : MonoBehaviour
         timer = wanderTimer;
         SetNewWanderPoint();
     }
+    void OnDrawGizmosSelected()
+{
+    // Use this to visualize the attack range in the editor
+    Gizmos.color = Color.red;
+    Gizmos.DrawWireSphere(transform.position, attackRange);
+}
 
     void Update()
     {
         float distance = Vector3.Distance(player.position, transform.position);
+
+        // Check for players within attack range using Physics.OverlapSphere
+    Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+    foreach (var hitCollider in hitColliders)
+    {
+        if (hitCollider.CompareTag("Player") && Time.time > lastAttackTime + attackCooldown)
+        {
+            AttackPlayer(hitCollider); // Call your attack function
+            lastAttackTime = Time.time; // Reset attack timer
+            break; // Assuming only one player, break after attacking
+        }
+    }
         
         if(animationController.IsInAnimationState("Attack") && animationController.IsAnimationFinished())
         {
@@ -161,9 +183,10 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void AttackPlayer()
+    private void AttackPlayer(Collider enemy)
     {
         //animator.SetTrigger("Attack");
+        enemy.GetComponent<Health>().TakeDamage(10); // Assuming 10 damage per attack
         animationController.TriggerAnimation("Attack");
     }
 }
