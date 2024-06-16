@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     private void HandleWeaponChange(CombatModel.WeaponType weapon)
     {
         combatController.HandleWeaponChange(weapon);
-        TriggerWeaponAnimation(weapon);
+        //TriggerWeaponAnimation(weapon);
     }
 
     private void TriggerWeaponAnimation(CombatModel.WeaponType weapon)

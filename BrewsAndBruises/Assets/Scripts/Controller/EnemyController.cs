@@ -15,13 +15,20 @@ public class EnemyController : MonoBehaviour
     private Animator animator;
     private float timer;
     private Vector3 wanderPoint;
+    private AnimationController animationController;
+    private Health health;
+
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-        //animator = GetComponent<Animator>();
+        animationController = GetComponent<AnimationController>();
+        health = GetComponent<Health>();
+        animationController.RegisterAnimation("Walking", false);
+        animationController.RegisterAnimation("Attack", true);
+        animationController.RegisterAnimation("BeeingHit", true);
 
         if (rb == null) {
             rb = gameObject.AddComponent<Rigidbody>();
@@ -35,6 +42,18 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         float distance = Vector3.Distance(player.position, transform.position);
+        
+        if(animationController.IsInAnimationState("Attack") && animationController.IsAnimationFinished())
+        {
+           //Debug.Log("Walking");
+           animationController.TriggerAnimation("Walking");
+        }
+        if( animationController.IsAnimationFinished())
+        {
+           //Debug.Log("Walking");
+           animationController.TriggerAnimation("Walking");
+        }
+
 
         if (distance <= lookRadius)
         {
@@ -80,7 +99,9 @@ public class EnemyController : MonoBehaviour
 
 
     void ChasePlayer()
+
 {
+    
     if (agent.enabled && agent.isOnNavMesh)
     {
         agent.speed = chaseSpeed;
@@ -94,6 +115,7 @@ public class EnemyController : MonoBehaviour
     {
         agent.enabled = false;
         rb.isKinematic = false;
+        animationController.TriggerAnimation("BeeingHit");
         rb.AddForce(force, ForceMode.Impulse);
         //animator.SetTrigger("Knockdown");
         StartCoroutine(StandUpRoutine());
@@ -137,5 +159,11 @@ public class EnemyController : MonoBehaviour
             Debug.LogError("No valid NavMesh position found near " + transform.position);
             return Vector3.zero;
         }
+    }
+
+    private void AttackPlayer()
+    {
+        //animator.SetTrigger("Attack");
+        animationController.TriggerAnimation("Attack");
     }
 }

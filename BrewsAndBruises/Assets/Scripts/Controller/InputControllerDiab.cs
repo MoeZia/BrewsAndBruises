@@ -107,21 +107,36 @@ public class InputControllerDiab : MonoBehaviour
     }
 
     private void HandleCombatInput()
+{
+    if (Input.GetKeyDown(KeyCode.Alpha1))
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            OnWeaponChange?.Invoke(CombatModel.WeaponType.Fist);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            OnWeaponChange?.Invoke(CombatModel.WeaponType.Trumpet);
-        }
-        if (Input.GetMouseButtonDown(0)) // Left mouse button for attack
-        {
-            OnAttack?.Invoke();
-            Debug.Log("Attack");
-        }
+        OnWeaponChange?.Invoke(CombatModel.WeaponType.Fist);
     }
+    if (Input.GetKeyDown(KeyCode.Alpha2))
+    {
+        OnWeaponChange?.Invoke(CombatModel.WeaponType.Trumpet);
+    }
+
+    // Check for attack input
+    if (Input.GetMouseButtonDown(0)) // Left mouse button for attack
+    {
+        // Determine target position from mouse click
+        Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray2, out RaycastHit hit, 100))
+        {
+        
+            Vector3 direction = (hit.point - transform.position).normalized;
+            // check if player looks in the right direction rotation TODO!!!
+            
+            
+            RotateTowards(direction); // Rotate towards the target position on attack
+        }
+
+        OnAttack?.Invoke();
+        Debug.Log("Attack");
+    }
+}
+
 
 
     public void Jump()
