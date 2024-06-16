@@ -22,7 +22,7 @@ public class SpawnController : MonoBehaviour{
         yield return new WaitForSeconds(interval);
         GameObject newObj = Instantiate(
             toSpawnedObject, 
-            new Vector3(gameObject.transform.position.x + Random.Range(-1*range,range),0,gameObject.transform.position.y + Random.Range(-1*range,range)),
+            new Vector3(gameObject.transform.position.x + Random.Range(-1*range,range),0,gameObject.transform.position.z + Random.Range(-1*range,range)),
             Quaternion.identity
         );
         StartCoroutine(spawnObject(interval, toSpawnedObject));

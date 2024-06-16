@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &376008139006804556
 Transform:
   m_ObjectHideFlags: 0
@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1a835fe7d4827af79aa7b73de7e19b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swanObject: {fileID: 8865561230898857009, guid: 6239f16275a62c0b8b8027be9517cf56, type: 3}
-  range: 5
-  enemySwarmInterval: 3.5
+  spawnObj: {fileID: 0}
+  range: 10
+  enemySwarmInterval: 9.18
