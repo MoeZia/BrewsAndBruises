@@ -20,15 +20,15 @@ public class WeaponUIController : MonoBehaviour
             foreach (GameObject weapon in weapons){
                 WeaponUI ui = weapon.GetComponent<WeaponUI>();
                 ui.setTexture(0);
-                if(currentWeapon == CombatModel.WeaponType.Fist && ui.weaponType == CombatModel.WeaponType.Fist ) {
+                if(currentWeapon == CombatModel.WeaponType.Mug && ui.weaponType == CombatModel.WeaponType.Mug ) {
                     weapon.GetComponent<WeaponUI>().setTexture(1);
                 }
 
-                if(currentWeapon == CombatModel.WeaponType.Trumpet && ui.weaponType == CombatModel.WeaponType.Trumpet) {
+                if(currentWeapon == CombatModel.WeaponType.Breze && ui.weaponType == CombatModel.WeaponType.Breze) {
                     weapon.GetComponent<WeaponUI>().setTexture(1);
                 }
             
-                if(currentWeapon == CombatModel.WeaponType.Whip && ui.weaponType == CombatModel.WeaponType.Trumpet) {
+                if(currentWeapon == CombatModel.WeaponType.Whip && ui.weaponType == CombatModel.WeaponType.Breze) {
                     weapon.GetComponent<WeaponUI>().setTexture(1);
                 }
             }

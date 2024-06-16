@@ -15,10 +15,10 @@ public class CombatView : MonoBehaviour
     {
         switch (weapon)
         {
-            case CombatModel.WeaponType.Fist:
+            case CombatModel.WeaponType.Mug:
                 animationController.TriggerAnimation("Fist");
                 break;
-            case CombatModel.WeaponType.Trumpet:
+            case CombatModel.WeaponType.Breze:
                 animationController.TriggerAnimation("Trumpet");
                 break;
             default:

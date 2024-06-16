@@ -6236,7 +6236,7 @@ GameObject:
   - component: {fileID: 827875245}
   - component: {fileID: 827875244}
   m_Layer: 0
-  m_Name: Trumpet
+  m_Name: Breze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7155,7 +7155,7 @@ GameObject:
   - component: {fileID: 1030596596}
   - component: {fileID: 1030596595}
   m_Layer: 0
-  m_Name: Fist
+  m_Name: Mug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12352,6 +12352,7 @@ MonoBehaviour:
   chaseSpeed: 2.12
   wanderRadius: 20
   wanderTimer: 5
+  attackRange: 2
 --- !u!195 &1698054170
 NavMeshAgent:
   m_ObjectHideFlags: 0

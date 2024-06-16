@@ -19,8 +19,8 @@ public class CombatController : MonoBehaviour {
 
     private void InitializeWeaponObjects() {
         // Assuming the names of the child GameObjects are "Fist", "Trumpet", "Whip"
-        weaponObjects[CombatModel.WeaponType.Fist] = weaponsParent.Find("Fist").gameObject;
-        weaponObjects[CombatModel.WeaponType.Trumpet] = weaponsParent.Find("Trumpet").gameObject;
+        weaponObjects[CombatModel.WeaponType.Mug] = weaponsParent.Find("Mug").gameObject;
+        weaponObjects[CombatModel.WeaponType.Breze] = weaponsParent.Find("Breze").gameObject;
         weaponObjects[CombatModel.WeaponType.Whip] = weaponsParent.Find("Whip").gameObject;
 
         // Set all weapons inactive initially

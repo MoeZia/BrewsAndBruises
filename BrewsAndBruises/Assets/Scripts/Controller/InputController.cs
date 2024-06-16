@@ -103,11 +103,11 @@ public class InputController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            OnWeaponChange?.Invoke(CombatModel.WeaponType.Fist);
+            OnWeaponChange?.Invoke(CombatModel.WeaponType.Mug);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            OnWeaponChange?.Invoke(CombatModel.WeaponType.Trumpet);
+            OnWeaponChange?.Invoke(CombatModel.WeaponType.Breze);
         }
         if (Input.GetMouseButtonDown(0)) // Left mouse button for attack
         {

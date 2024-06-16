@@ -95,10 +95,10 @@ public class PlayerController : MonoBehaviour
     {
         switch (weapon)
         {
-            case CombatModel.WeaponType.Fist:
+            case CombatModel.WeaponType.Mug:
                 animationController.TriggerAnimation("FistEquip");
                 break;
-            case CombatModel.WeaponType.Trumpet:
+            case CombatModel.WeaponType.Breze:
                 animationController.TriggerAnimation("TrumpetEquip");
                 break;
             case CombatModel.WeaponType.Whip:
@@ -114,10 +114,10 @@ public class PlayerController : MonoBehaviour
             CombatModel.WeaponType currentWeapon = combatController.GetCurrentWeapon();
             switch (currentWeapon)
             {
-                case CombatModel.WeaponType.Fist:
+                case CombatModel.WeaponType.Mug:
                     animationController.TriggerAnimation("Fist");
                     break;
-                case CombatModel.WeaponType.Trumpet:
+                case CombatModel.WeaponType.Breze:
                     animationController.TriggerAnimation("Trumpet");
                     break;
                 case CombatModel.WeaponType.Whip:

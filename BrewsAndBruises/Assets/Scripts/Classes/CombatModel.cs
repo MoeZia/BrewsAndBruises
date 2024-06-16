@@ -6,8 +6,8 @@ public class CombatModel
     public enum WeaponType
     {
         None,
-        Fist,
-        Trumpet,
+        Mug,
+        Breze,
         Whip
     }
 
@@ -35,9 +35,10 @@ public class CombatModel
 
     private void InitializeWeapons() {
         // Initialize each weapon with its specific force and damage
-        weaponsData.Add(WeaponType.Fist, new WeaponData(10.0f, 10));
-        weaponsData.Add(WeaponType.Trumpet, new WeaponData(5.0f, 50));
+        weaponsData.Add(WeaponType.Mug, new WeaponData(10.0f, 10));
+        weaponsData.Add(WeaponType.Breze, new WeaponData(5.0f, 50));
         weaponsData.Add(WeaponType.Whip, new WeaponData(2.0f, 20));
+        weaponsData.Add(WeaponType.None, new WeaponData(0.0f, 0));
     }
 
     public void SetWeapon(WeaponType weapon)
