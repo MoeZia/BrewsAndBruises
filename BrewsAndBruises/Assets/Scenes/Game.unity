@@ -2247,9 +2247,6 @@ PrefabInstance:
     - {fileID: 4445881421021997800, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8755791550911116304, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2055124824}
     - targetCorrespondingSourceObject: {fileID: 6459606020464246052, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1030596594}
@@ -13104,6 +13101,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 498603435}
+  - {fileID: 2055124824}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1625859359 stripped
@@ -15338,7 +15336,7 @@ GameObject:
   - component: {fileID: 2055124826}
   - component: {fileID: 2055124825}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15357,7 +15355,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1417579745}
-  m_Father: {fileID: 1113767451}
+  m_Father: {fileID: 1623607058}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -16081,7 +16079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7024577039574782229, guid: 9a7fcac6e3b11e3ca8331a14acbd93dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 366.1
+      value: 366
       objectReference: {fileID: 0}
     - target: {fileID: 7024577039574782229, guid: 9a7fcac6e3b11e3ca8331a14acbd93dd, type: 3}
       propertyPath: m_LocalPosition.y

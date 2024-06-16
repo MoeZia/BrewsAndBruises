@@ -14,10 +14,7 @@ public class EndOfGameScript : MonoBehaviour
     void OnTriggerEnter(Collider collider) {
         if(string.IsNullOrEmpty(triggerTag) && !collider.gameObject.CompareTag(triggerTag)) return;
         GameObject eventSystem = GameObject.Find("EventSystem");
-        Debug.Log( eventSystem.GetComponent<EndOfGameMenuScript>());
         eventSystem.GetComponent<EndOfGameMenuScript>().ActivateMenu();
        
     }
-
-
 }
