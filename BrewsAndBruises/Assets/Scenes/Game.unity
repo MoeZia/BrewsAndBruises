@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -979,7 +979,8 @@ PrefabInstance:
       value: Zelt (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -8700617353114198275, guid: 0229714ff7fb04c8d9bb7133ed20172a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0229714ff7fb04c8d9bb7133ed20172a, type: 3}
@@ -1510,7 +1511,9 @@ PrefabInstance:
       value: Zelt_hellbraun_steifendach
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: e8efef0c03cd64ebdb46081f71fac5f5, type: 3}
+    - {fileID: -8700617353114198275, guid: e8efef0c03cd64ebdb46081f71fac5f5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e8efef0c03cd64ebdb46081f71fac5f5, type: 3}
@@ -2405,7 +2408,9 @@ PrefabInstance:
       value: Zelt_hellbraun (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: 9171f24a25a3546808a02d67654ac361, type: 3}
+    - {fileID: -8700617353114198275, guid: 9171f24a25a3546808a02d67654ac361, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9171f24a25a3546808a02d67654ac361, type: 3}
@@ -2890,7 +2895,9 @@ PrefabInstance:
       value: Zelt_basic2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: 831f205ad111143919ce454237a8f281, type: 3}
+    - {fileID: -8700617353114198275, guid: 831f205ad111143919ce454237a8f281, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 831f205ad111143919ce454237a8f281, type: 3}
@@ -3940,7 +3947,9 @@ PrefabInstance:
       value: Zelt_hellblau (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: ca601255eede44f91bb6dd15bbff4afb, type: 3}
+    - {fileID: -8700617353114198275, guid: ca601255eede44f91bb6dd15bbff4afb, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ca601255eede44f91bb6dd15bbff4afb, type: 3}
@@ -6299,7 +6308,8 @@ PrefabInstance:
       value: 'scooter '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -8700617353114198275, guid: 33c2d3487e62e496c8b073d150021fc2, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33c2d3487e62e496c8b073d150021fc2, type: 3}
@@ -6643,7 +6653,9 @@ PrefabInstance:
       value: Zelt_hellbraun_steifendach2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: 27b59cb3ba27c4e0b9bdcf721fb12e6f, type: 3}
+    - {fileID: -8700617353114198275, guid: 27b59cb3ba27c4e0b9bdcf721fb12e6f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 27b59cb3ba27c4e0b9bdcf721fb12e6f, type: 3}
@@ -6720,7 +6732,9 @@ PrefabInstance:
       value: Zelt_basic2 (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: 831f205ad111143919ce454237a8f281, type: 3}
+    - {fileID: -8700617353114198275, guid: 831f205ad111143919ce454237a8f281, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 831f205ad111143919ce454237a8f281, type: 3}
@@ -9928,7 +9942,9 @@ PrefabInstance:
       value: "Zelt_ka\u0308fer"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: da8ce0d18f32c4431a734d47721387e7, type: 3}
+    - {fileID: -8700617353114198275, guid: da8ce0d18f32c4431a734d47721387e7, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: da8ce0d18f32c4431a734d47721387e7, type: 3}
@@ -11146,7 +11162,8 @@ PrefabInstance:
       value: Zelt
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -8700617353114198275, guid: 0229714ff7fb04c8d9bb7133ed20172a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0229714ff7fb04c8d9bb7133ed20172a, type: 3}
@@ -11245,7 +11262,9 @@ PrefabInstance:
       value: Zelt_hellbraun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: 9171f24a25a3546808a02d67654ac361, type: 3}
+    - {fileID: -8700617353114198275, guid: 9171f24a25a3546808a02d67654ac361, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9171f24a25a3546808a02d67654ac361, type: 3}
@@ -11388,7 +11407,9 @@ PrefabInstance:
       value: -0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: 831f205ad111143919ce454237a8f281, type: 3}
+    - {fileID: -8700617353114198275, guid: 831f205ad111143919ce454237a8f281, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 831f205ad111143919ce454237a8f281, type: 3}
@@ -12522,7 +12543,9 @@ PrefabInstance:
       value: Zelt_hellblau
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: ca601255eede44f91bb6dd15bbff4afb, type: 3}
+    - {fileID: -8700617353114198275, guid: ca601255eede44f91bb6dd15bbff4afb, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ca601255eede44f91bb6dd15bbff4afb, type: 3}
@@ -13388,7 +13411,9 @@ PrefabInstance:
       value: Zelt_hellbraun_steifendach2 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: 27b59cb3ba27c4e0b9bdcf721fb12e6f, type: 3}
+    - {fileID: -8700617353114198275, guid: 27b59cb3ba27c4e0b9bdcf721fb12e6f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 27b59cb3ba27c4e0b9bdcf721fb12e6f, type: 3}
@@ -14005,7 +14030,9 @@ PrefabInstance:
       value: Zelt_hellbraun_steifendach (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2654713335656134247, guid: e8efef0c03cd64ebdb46081f71fac5f5, type: 3}
+    - {fileID: -8700617353114198275, guid: e8efef0c03cd64ebdb46081f71fac5f5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e8efef0c03cd64ebdb46081f71fac5f5, type: 3}
