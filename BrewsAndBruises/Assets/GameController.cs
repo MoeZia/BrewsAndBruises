@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
 
-        prefabSpawner = GetComponent<PrefabSpawner>();
+        /* prefabSpawner = GetComponent<PrefabSpawner>();
         Vector3 spawnPoint = new Vector3(x, 0, z);
         prefabSpawner.SpawnPrefabGridFromIndex(prefabint, gridDimension, spawnPoint);
         prefabSpawner.SpawnPrefabGridFromIndex(1, 3, spawnPoint);
@@ -34,6 +34,25 @@ public class GameController : MonoBehaviour
         spawnPoint = new Vector3(x+ 200, 0, z );
         prefabSpawner.SpawnPrefabGridFromIndex(prefabint, gridDimension, spawnPoint);
         prefabSpawner.SpawnPrefabGridFromIndex(1, 3, spawnPoint);
+        */
+
+        prefabSpawner = GetComponent<PrefabSpawner>();
+
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(0,9,0);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(0,9,1);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(0,9,2);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(0,9,3);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(0,9,4);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(0,9,5);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,0);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,1);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,2);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,3);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,4);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,5);
+       
+       
+
 
 
 

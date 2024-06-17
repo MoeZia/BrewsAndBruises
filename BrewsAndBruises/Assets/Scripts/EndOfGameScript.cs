@@ -12,9 +12,9 @@ public class EndOfGameScript : MonoBehaviour
         mainCamera = Camera.main;
     }
     void OnTriggerEnter(Collider collider) {
-        if(string.IsNullOrEmpty(triggerTag) && !collider.gameObject.CompareTag(triggerTag)) return;
-        GameObject eventSystem = GameObject.Find("EventSystem");
-        eventSystem.GetComponent<EndOfGameMenuScript>().ActivateMenu();
-       
+        if (collider.gameObject.CompareTag(triggerTag)) {
+            GameObject eventSystem = GameObject.Find("EventSystem");
+            eventSystem.GetComponent<EndOfGameMenuScript>().ActivateMenu();
+        }
     }
 }
