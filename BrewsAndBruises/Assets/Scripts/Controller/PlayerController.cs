@@ -94,6 +94,10 @@ public class PlayerController : MonoBehaviour
         combatController.HandleWeaponChange(weapon);
         //TriggerWeaponAnimation(weapon);
     }
+    public void KnockBackForce(Vector3 froce)
+    {
+       GetComponent<Rigidbody>().AddForce(froce, ForceMode.Impulse);
+    }
 
     private void TriggerWeaponAnimation(CombatModel.WeaponType weapon)
     {

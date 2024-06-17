@@ -7927,7 +7927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306dcdcfe6a36bb41ac1bb89cfa6d817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 12.2
+  moveSpeed: 7
   jumpForce: 5
   rotationSpeed: 600
   OnRunForward:
@@ -11734,7 +11734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1113767451}
-  offset: {x: 14.9, y: 15.2, z: -3.3}
+  offset: {x: -29.5, y: 21.4, z: -11.67}
   smoothSpeed: 10.73
 --- !u!81 &1623607056
 AudioListener:

@@ -59,6 +59,7 @@ public class Projectile : MonoBehaviour
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damage);
+                other.GetComponent<PlayerController>().KnockBackForce(transform.forward * 2);
             }
 
             // Destroy the projectile upon collision

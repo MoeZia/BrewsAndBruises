@@ -136,6 +136,7 @@ public class EnemyController : MonoBehaviour
     private void AttackPlayer(Collider playerCollider)
     {
         //animationController.TriggerAnimation("Attack");
+        playerCollider.GetComponent<PlayerController>().KnockBackForce(transform.forward * 2); // Example knockback direction
         playerCollider.GetComponent<Health>().TakeDamage(10); // Example damage value
     }
 
