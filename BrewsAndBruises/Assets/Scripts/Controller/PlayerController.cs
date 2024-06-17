@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnHealthChanged(string id, int currentHealth, int maxHealth)
     {
-        Debug.Log($"Player Health Changed: {currentHealth}/{maxHealth}");
+      //  Debug.Log($"Player Health Changed: {currentHealth}/{maxHealth}");
     }
 
     private void OnDeath(string id)

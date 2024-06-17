@@ -149,12 +149,12 @@ public class EnemyController : MonoBehaviour
 
     private IEnumerator RecoverFromPushback()
     {
-        yield return new WaitForSeconds(1.5f); // Wait for the effects of the pushback to dissipate
+        yield return new WaitForSeconds(0.5f); // Wait for the effects of the pushback to dissipate
 
         // Optionally add logic to recover posture or re-engage in combat
         animationController.TriggerAnimation("BeingHit"); // Assuming you have a recovery or being hit animation
 
-        yield return new WaitForSeconds(0.5f); // Additional recovery time
+        yield return new WaitForSeconds(1.5f); // Additional recovery time
 
         ReenableNavMeshAgent();
     }

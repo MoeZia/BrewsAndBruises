@@ -70,14 +70,20 @@ public class CombatController : MonoBehaviour {
             Health enemyHealth = hitCollider.GetComponent<Health>();
             if (enemyHealth != null) {
                 enemyHealth.TakeDamage(combatModel.GetDamage());
-                Debug.Log($"Hit {hitCollider.name}: Dealing {combatModel.GetDamage()} damage.");
+             //   Debug.Log($"Hit {hitCollider.name}: Dealing {combatModel.GetDamage()} damage.");
             }
             EnemyController enemy = hitCollider.GetComponent<EnemyController>();
+            RangedEnemyController rangedEnemy = hitCollider.GetComponent<RangedEnemyController>();
             if (enemy != null) {
         Vector3 pushDirection = (hitCollider.transform.position - transform.position).normalized;
         float pushForce = combatModel.GetAttackForce(); // Assuming this returns the force based on the weapon
         enemy.ApplyPushback(pushDirection * pushForce);
     }
+        if(rangedEnemy != null) {
+            Vector3 pushDirection = (hitCollider.transform.position - transform.position).normalized;
+            float pushForce = combatModel.GetAttackForce(); 
+            rangedEnemy.ApplyPushback(pushDirection * pushForce);
+        }
         }
        
     }

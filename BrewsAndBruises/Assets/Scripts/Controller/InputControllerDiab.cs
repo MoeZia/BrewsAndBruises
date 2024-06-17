@@ -133,7 +133,7 @@ public class InputControllerDiab : MonoBehaviour
         }
 
         OnAttack?.Invoke();
-        Debug.Log("Attack");
+      //  Debug.Log("Attack");
     }
 }
 

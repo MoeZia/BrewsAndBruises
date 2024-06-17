@@ -17,18 +17,23 @@ public class GameController : MonoBehaviour
         prefabSpawner = GetComponent<PrefabSpawner>();
         Vector3 spawnPoint = new Vector3(x, 0, z);
         prefabSpawner.SpawnPrefabGridFromIndex(prefabint, gridDimension, spawnPoint);
+        prefabSpawner.SpawnPrefabGridFromIndex(1, 3, spawnPoint);
         // adding 4 Hords at different locations at start of the game ----> later trigger zones to take of load !
         spawnPoint = new Vector3(x+ 50, 0, z );
         prefabSpawner.SpawnPrefabGridFromIndex(prefabint, gridDimension, spawnPoint);
+        prefabSpawner.SpawnPrefabGridFromIndex(1, 3, spawnPoint);
 
         spawnPoint = new Vector3(x+ 100, 0, z );
         prefabSpawner.SpawnPrefabGridFromIndex(prefabint, gridDimension, spawnPoint);
+        prefabSpawner.SpawnPrefabGridFromIndex(1, 3, spawnPoint);
 
         spawnPoint = new Vector3(x+ 150, 0, z );
         prefabSpawner.SpawnPrefabGridFromIndex(prefabint, gridDimension, spawnPoint);
+        prefabSpawner.SpawnPrefabGridFromIndex(1, 3, spawnPoint);
 
         spawnPoint = new Vector3(x+ 200, 0, z );
         prefabSpawner.SpawnPrefabGridFromIndex(prefabint, gridDimension, spawnPoint);
+        prefabSpawner.SpawnPrefabGridFromIndex(1, 3, spawnPoint);
 
 
 
