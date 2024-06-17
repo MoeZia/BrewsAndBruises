@@ -8,6 +8,7 @@ using UnityEditor;
 public class PrefabSpawner : MonoBehaviour
 {
     public List<GameObject> prefabsToSpawn;
+    public List<GameObject> Spawnpoints;
     public int prefabIndex = 0; // Index to select which prefab to spawn
     public Vector3 spawnPoint = new Vector3(0, 0, 0);
     public int gridDimension = 9;
@@ -46,6 +47,18 @@ public class PrefabSpawner : MonoBehaviour
         if (index >= 0 && index < prefabsToSpawn.Count)
         {
             GameObject selectedPrefab = prefabsToSpawn[index];
+            SpawnGridAtPoint(dimension, spawnPt, selectedPrefab);
+        }
+        else
+        {
+            Debug.LogError("Prefab index out of range.");
+        }
+    }
+    public void SpawnPrefabGridFromIndexwithSpawnPointIndex(int index, int dimension, int sPt)
+        if (index >= 0 && index < prefabsToSpawn.Count)
+        {
+            GameObject selectedPrefab = prefabsToSpawn[index];
+            Vector3 spawnPt = Spawnpoints[sPt].transform.position;
             SpawnGridAtPoint(dimension, spawnPt, selectedPrefab);
         }
         else
