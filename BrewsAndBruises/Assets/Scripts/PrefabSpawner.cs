@@ -54,7 +54,7 @@ public class PrefabSpawner : MonoBehaviour
             Debug.LogError("Prefab index out of range.");
         }
     }
-    public void SpawnPrefabGridFromIndexwithSpawnPointIndex(int index, int dimension, int sPt)
+    public void SpawnPrefabGridFromIndexwithSpawnPointIndex(int index, int dimension, int sPt){
         if (index >= 0 && index < prefabsToSpawn.Count)
         {
             GameObject selectedPrefab = prefabsToSpawn[index];
