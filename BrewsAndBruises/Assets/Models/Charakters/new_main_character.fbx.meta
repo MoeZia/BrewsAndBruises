@@ -3,7 +3,42 @@ guid: 4fbaf187763a80e418b6d5a729605450
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Character
+    second: {fileID: 2100000, guid: 5fa3c575a56400c458d2148b3897e6f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyelash
+    second: {fileID: 2100000, guid: 4ff77d3429919584f97a9ee900c3da69, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyes
+    second: {fileID: 2100000, guid: dd68684a13f9ed344b6a0c381d52d267, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyesbase
+    second: {fileID: 2100000, guid: 1c9a057d59a56a74a9f5fd94e5163706, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: haare
+    second: {fileID: 2100000, guid: e6ad89a1fd23af842b20109c95edf2d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hat
+    second: {fileID: 2100000, guid: 4aa8615d3af89af46b0ad11c915723e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: white
+    second: {fileID: 2100000, guid: dabb248ba88fa9147b9babaf456ca305, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
