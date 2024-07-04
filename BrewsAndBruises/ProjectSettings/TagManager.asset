@@ -9,6 +9,8 @@ TagManager:
   - WIP
   - Beer
   - Weapon
+  - GameMenu
+  - AudioManager
   layers:
   - Default
   - TransparentFX

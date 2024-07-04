@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -39,6 +40,8 @@ public class PlayerController : MonoBehaviour
         animationController.RegisterAnimation("Fist", true);
         animationController.RegisterAnimation("Trumpet", true);
         animationController.RegisterAnimation("Whip", true); // Assuming you add this
+
+        
     }
 
     void RunForward()
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         animationController.TriggerAnimation("RunForward");
+        FindObjectOfType<AudioManager>().Play("running");
     }
 
     void RotateLeft()
@@ -68,6 +72,7 @@ public class PlayerController : MonoBehaviour
     void Idle()
     {
         animationController.TriggerAnimation("Idle");
+        FindObjectOfType<AudioManager>().Stop("running");
     }
 
     public void TakeDamage(int damage)
@@ -84,9 +89,15 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log($"Player with ID {id} died");
         GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
-        GameObject eventSystem = GameObject.Find("EventSystem");
-        eventSystem.GetComponent<EndOfGameMenuScript>().ActivateMenu();
-        eventSystem.GetComponent<EndOfGameMenuScript>().setHeadLine("You Los");
+        FindObjectOfType<AudioManager>().Stop("BackgroundMusic");
+        FindObjectOfType<AudioManager>().Stop("BackgroundPeople");
+        FindObjectOfType<AudioManager>().Play("lose");
+        SceneManager.LoadSceneAsync("Lose");
+
+
+        //GameObject eventSystem = GameObject.Find("EventSystem");
+        //eventSystem.GetComponent<EndOfGameMenuScript>().ActivateMenu();
+        //eventSystem.GetComponent<EndOfGameMenuScript>().setHeadLine("You Los");
     }
 
     private void HandleWeaponChange(CombatModel.WeaponType weapon)
@@ -124,12 +135,15 @@ public class PlayerController : MonoBehaviour
             {
                 case CombatModel.WeaponType.Mug:
                     animationController.TriggerAnimation("Fist");
+                    FindObjectOfType<AudioManager>().Play("glassHit");
                     break;
                 case CombatModel.WeaponType.Breze:
-                    animationController.TriggerAnimation("Trumpet");
+                    animationController.TriggerAnimation("Whip");
+                    FindObjectOfType<AudioManager>().Play("brezel");
                     break;
                 case CombatModel.WeaponType.Whip:
                     animationController.TriggerAnimation("Whip"); 
+                    FindObjectOfType<AudioManager>().Play("trumpet");
                     break;
             }
 

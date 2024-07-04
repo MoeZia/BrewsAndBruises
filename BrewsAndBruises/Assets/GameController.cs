@@ -54,7 +54,8 @@ public class GameController : MonoBehaviour
        
 
 
-
+        FindObjectOfType<AudioManager>().Play("BackgroundMusic");
+        FindObjectOfType<AudioManager>().Play("BackgroundPeople");
 
         
         
