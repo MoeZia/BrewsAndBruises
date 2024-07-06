@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657832, g: 0.49641222, b: 0.57481664, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1216,7 +1216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.9433962, b: 0.17060019, a: 1}
+  m_Color: {r: 0.3372549, g: 0.84313726, b: 0.5882353, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1745,7 +1745,7 @@ GameObject:
   - component: {fileID: 245138066}
   - component: {fileID: 245138068}
   m_Layer: 0
-  m_Name: WIP
+  m_Name: Brezel
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1760,15 +1760,15 @@ RectTransform:
   m_GameObject: {fileID: 245138064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 498603435}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -485}
-  m_SizeDelta: {x: 25, y: 25}
+  m_AnchoredPosition: {x: -730, y: 450}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &245138066
 MonoBehaviour:
@@ -1790,7 +1790,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: f1834144955545f21a718ff7ebaa715b, type: 3}
+  m_Texture: {fileID: 2800000, guid: 32fba2e35a5186f9dbcba9146a498501, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1818,8 +1818,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textures:
-  - {fileID: 2800000, guid: f1834144955545f21a718ff7ebaa715b, type: 3}
-  - {fileID: 2800000, guid: 3c8a6205301c55dd7928da266e697ea6, type: 3}
+  - {fileID: 2800000, guid: 32fba2e35a5186f9dbcba9146a498501, type: 3}
+  - {fileID: 2800000, guid: 922e0eb7dc51af4abbc27103b737e34e, type: 3}
   rawImage: {fileID: 245138066}
   weaponType: 2
 --- !u!1001 &271545621
@@ -5063,14 +5063,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: ecc11374ff7fb9f25a0cc886719fe174, type: 3}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -13343,14 +13343,14 @@ RectTransform:
   m_GameObject: {fileID: 1947298293}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 498603435}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: -485}
+  m_AnchoredPosition: {x: -850, y: 450}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1947298295
@@ -13373,7 +13373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 8f711841c41b1c59787ac593cbe6e271, type: 3}
+  m_Texture: {fileID: 2800000, guid: 93009406d79a6bd9bb7dd14cccf16683, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -13401,8 +13401,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textures:
-  - {fileID: 2800000, guid: 8f711841c41b1c59787ac593cbe6e271, type: 3}
-  - {fileID: 2800000, guid: 6758c0b0a8e1fd399a3f36f473f2c5b2, type: 3}
+  - {fileID: 2800000, guid: 93009406d79a6bd9bb7dd14cccf16683, type: 3}
+  - {fileID: 2800000, guid: 13896001d0623d833ae89521b5b69ca1, type: 3}
   rawImage: {fileID: 1947298295}
   weaponType: 1
 --- !u!1 &1954101936
@@ -13687,8 +13687,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -455}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 750, y: 450}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2015034688
 MonoBehaviour:
