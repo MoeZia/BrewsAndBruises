@@ -39,7 +39,7 @@ public class Health : MonoBehaviour
     {
         currentHealth -= damage;
         OnHealthChanged?.Invoke(id, currentHealth, maxHealth);
-      
+      Debug.Log(healthBar);
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
