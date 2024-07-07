@@ -8965,37 +8965,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0a4e70f10d5ae9643878997861cd8b80, type: 3}
   m_PrefabInstance: {fileID: 1858883826}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1262644438
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1262644439}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1262644439
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262644438}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 78.218445, y: 6.413764, z: 42.480583}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1274837322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10504,6 +10473,7 @@ GameObject:
   - component: {fileID: 1459435254}
   - component: {fileID: 1459435253}
   - component: {fileID: 1459435255}
+  - component: {fileID: 1459435256}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -10620,6 +10590,19 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 3e4b16725448b7843a13ebff21db4bf8, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &1459435256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459435251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e538e8c1d0418857adae24087afb6de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 3507195209128601191, guid: 760308333cd10e012a079fa0ea0e5bfd, type: 3}
 --- !u!1 &1459972126
 GameObject:
   m_ObjectHideFlags: 0
@@ -12177,7 +12160,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.015915
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -15233,7 +15216,6 @@ SceneRoots:
   - {fileID: 8115004992986032769}
   - {fileID: 4220011845452752708}
   - {fileID: 1623607058}
-  - {fileID: 1262644439}
   - {fileID: 7285705760563552948}
   - {fileID: 1670049868}
   - {fileID: 6256958362076079753}

@@ -361,6 +361,7 @@
 "Assets/Scripts/Classes/AudioSound.cs"
 "Assets/Scripts/Classes/CombatModel.cs"
 "Assets/Scripts/Classes/GameState.cs"
+"Assets/Scripts/ClickPointerScript.cs"
 "Assets/Scripts/Controller/Animation Controller.cs"
 "Assets/Scripts/Controller/AudioManager.cs"
 "Assets/Scripts/Controller/CombatController.cs"

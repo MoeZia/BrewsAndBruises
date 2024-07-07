@@ -12,6 +12,7 @@ TagManager:
   - GameMenu
   - AudioManager
   - StaminaBar
+  - Pointer
   layers:
   - Default
   - TransparentFX
