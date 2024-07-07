@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -40,6 +41,18 @@ public class PlayerController : MonoBehaviour
         animationController.RegisterAnimation("Fist", true);
         animationController.RegisterAnimation("Trumpet", true);
         animationController.RegisterAnimation("Whip", true); // Assuming you add this
+
+        /// Register all sounds with the Audio Manager
+        /// FindObjectOfType<AudioManager>().Play("running");
+        /// FindObjectOfType<AudioManager>().Play("glassHit");
+        /// FindObjectOfType<AudioManager>().Play("brezel");
+        /// FindObjectOfType<AudioManager>().Play("trumpet");
+        /// FindObjectOfType<AudioManager>().Play("lose");
+        /// FindObjectOfType<AudioManager>().Play("BackgroundMusic");
+        /// FindObjectOfType<AudioManager>().Play("BackgroundPeople");
+       // This is pretty intensive, becase it needs to be searched for every time so lets make a link to the Audio manager on start..
+       AudioManager audioManager = FindObjectOfType<AudioManager>();
+       /// and then we dont have to search every time we want to play a sound or stop a sound
 
         
     }

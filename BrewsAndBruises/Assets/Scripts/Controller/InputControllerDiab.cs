@@ -62,15 +62,16 @@ public class InputControllerDiab : MonoBehaviour
     private void HandleMovementInput()
     {
         if (Input.GetMouseButtonDown(1)) // Right mouse button for movement
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100))
-            {
-                targetPosition = hit.point;
-                isMoving = true;
-                OnRunForward?.Invoke();
-            }
-        }
+{
+    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    int layerMask = 1 << LayerMask.NameToLayer("Ground"); 
+    if (Physics.Raycast(ray, out RaycastHit hit, 100, layerMask)) 
+    {
+        targetPosition = hit.point;
+        isMoving = true;
+        OnRunForward?.Invoke();
+    }
+}
 
         if (isMoving && Vector3.Distance(transform.position, targetPosition) > 0.5f)
         {
