@@ -31,11 +31,14 @@ public class PlayerController : MonoBehaviour
         inputController.OnIdle.AddListener(Idle);
         inputController.OnWeaponChange.AddListener(HandleWeaponChange);
         inputController.OnAttack.AddListener(PerformAttack);
+        inputController.OnBlockStart.AddListener(BlockStart);
+        inputController.OnBlockEnd.AddListener(BlockEnd);
 
         // Register all animations with the Animation Controller
         animationController.RegisterAnimation("RunForward", false);
         animationController.RegisterAnimation("RotateLeft", false);
         animationController.RegisterAnimation("RotateRight", false);
+        animationController.RegisterAnimation("BlockingLoop", true);
         animationController.RegisterAnimation("Jump", true);
         animationController.RegisterAnimation("Idle", false);
         animationController.RegisterAnimation("Fist", true);
@@ -70,6 +73,12 @@ public class PlayerController : MonoBehaviour
     void RotateLeft()
     {
         //animationController.TriggerAnimation("RotateLeft");
+    }
+    void BlockStart(){
+        animationController.TriggerAnimation("BlockingLoop");
+    }
+    void BlockEnd(){
+        animationController.TriggerAnimation("Idle");
     }
 
     void RotateRight()
@@ -147,20 +156,27 @@ public class PlayerController : MonoBehaviour
             switch (currentWeapon)
             {
                 case CombatModel.WeaponType.Mug:
+                    if(!animationController.IsInSpecificAnimationState("Fist", true))
+                    {
+                    break;
+                    }
                     animationController.TriggerAnimation("Fist");
                     FindObjectOfType<AudioManager>().Play("glassHit");
+                    combatController.PerformAttack();
                     break;
                 case CombatModel.WeaponType.Breze:
                     animationController.TriggerAnimation("Whip");
                     FindObjectOfType<AudioManager>().Play("brezel");
+                    combatController.PerformAttack();
                     break;
                 case CombatModel.WeaponType.Whip:
                     animationController.TriggerAnimation("Whip"); 
                     FindObjectOfType<AudioManager>().Play("trumpet");
+                    combatController.PerformAttack();
                     break;
             }
 
-            combatController.PerformAttack();
+        
         }
     }
 }

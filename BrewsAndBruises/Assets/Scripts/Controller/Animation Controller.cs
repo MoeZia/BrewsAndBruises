@@ -55,4 +55,21 @@ public class AnimationController : MonoBehaviour
         }
         return false;
     }
+    //check if in specific animation and if finished
+    public bool IsInSpecificAnimationState(string stateName, bool isFinished)
+    {
+        if (IsInAnimationState(stateName) && IsAnimationFinished() == isFinished)
+        {
+            return true;
+        }
+        else if(IsInAnimationState(stateName) && IsAnimationFinished() != isFinished)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+   
 }

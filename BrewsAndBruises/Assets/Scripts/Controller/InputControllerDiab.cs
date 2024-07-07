@@ -39,7 +39,7 @@ public class InputControllerDiab : MonoBehaviour
         HandleMovementInput();
         HandleBlockingInput(); // Handle blocking input
 
-        if (isMoving && !hasReachedTarget())
+        if (isMoving && !hasReachedTarget()&&!isBlocking)
             MoveTowardsTarget();
         else
         {
@@ -63,11 +63,12 @@ public class InputControllerDiab : MonoBehaviour
         OnAttack ??= new UnityEvent();
         OnBlockStart ??= new UnityEvent();
         OnBlockEnd ??= new UnityEvent();
+        
     }
 
     private void HandleMovementInput()
     {
-        if (Input.GetMouseButtonDown(1)) // Right mouse button for movement
+        if (Input.GetMouseButtonDown(1)&& !isBlocking) // Right mouse button for movement
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             int layerMask = 1 << LayerMask.NameToLayer("Ground");
@@ -84,7 +85,7 @@ public class InputControllerDiab : MonoBehaviour
             Vector3 direction = (targetPosition - transform.position).normalized;
             RotateTowards(direction);
         }
-        if (!isMoving && animationController.IsAnimationFinished())
+        if (!isMoving && animationController.IsAnimationFinished() && !isBlocking)
         {
             OnIdle?.Invoke();
         }
@@ -124,7 +125,7 @@ public class InputControllerDiab : MonoBehaviour
         }
 
         // Check for attack input
-        if (Input.GetMouseButtonDown(0)) // Left mouse button for attack
+        if (Input.GetMouseButtonDown(0)&&!isBlocking) // Left mouse button for attack
         {
             // Determine target position from mouse click
             Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
