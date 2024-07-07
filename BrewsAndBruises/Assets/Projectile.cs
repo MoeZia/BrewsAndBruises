@@ -56,11 +56,13 @@ public class Projectile : MonoBehaviour
         {
             // Apply damage to the player
             Health playerHealth = other.GetComponent<Health>();
-            if (playerHealth != null)
+            if (playerHealth != null&& other.GetComponent<InputControllerDiab>().isBlocking == false)
             {
                 playerHealth.TakeDamage(damage);
-                other.GetComponent<PlayerController>().KnockBackForce(transform.forward * 2);
-            }
+                other.GetComponent<PlayerController>().KnockBackForce(transform.forward * 3);
+            }else{
+                other.GetComponent<PlayerController>().KnockBackForce(transform.forward * 5);
+                }
 
             // Destroy the projectile upon collision
             Destroy(gameObject);

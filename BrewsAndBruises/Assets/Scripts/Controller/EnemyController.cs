@@ -22,6 +22,8 @@ public class EnemyController : MonoBehaviour
     private Vector3 wanderPoint; // Point to wander to
     private float timer; // Timer for wandering
 
+    public int damage = 10; // Damage value for the enemy attack
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -136,8 +138,16 @@ public class EnemyController : MonoBehaviour
     private void AttackPlayer(Collider playerCollider)
     {
         //animationController.TriggerAnimation("Attack");
-        playerCollider.GetComponent<PlayerController>().KnockBackForce(transform.forward * 2); // Example knockback direction
-        playerCollider.GetComponent<Health>().TakeDamage(10); // Example damage value
+        PlayerController PlayerController = playerCollider.GetComponent<PlayerController>();// Example knockback direction
+        if(playerCollider.GetComponent<InputControllerDiab>().isBlocking==false){
+            
+            playerCollider.GetComponent<Health>().TakeDamage(damage);
+            PlayerController.KnockBackForce(transform.forward * 4);
+
+        }else{
+            PlayerController.KnockBackForce(transform.forward * 8);
+        }
+        
     }
 
    public void ApplyPushback(Vector3 force)

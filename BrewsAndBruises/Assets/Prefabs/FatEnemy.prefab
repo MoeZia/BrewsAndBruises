@@ -14,15 +14,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: accf1158bd9cc9f478ad6d36a3b86488, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: accf1158bd9cc9f478ad6d36a3b86488, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: accf1158bd9cc9f478ad6d36a3b86488, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: accf1158bd9cc9f478ad6d36a3b86488, type: 3}
       propertyPath: m_LocalPosition.x
@@ -401,7 +401,8 @@ MonoBehaviour:
   chaseSpeed: 2
   wanderRadius: 5
   wanderTimer: 3
-  attackRange: 2
+  attackRange: 2.3
+  damage: 10
 --- !u!114 &5924591458972087442
 MonoBehaviour:
   m_ObjectHideFlags: 0
