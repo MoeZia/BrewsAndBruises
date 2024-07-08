@@ -1,85 +1,120 @@
 using UnityEngine;
-using System.Collections;
 
 public class Boomerang : MonoBehaviour
 {
-    public Transform playerTransform; // Reference to the player's transform
-    public float speed = 10f; // Speed of the boomerang
-    public float rotationSpeed = 360f; // Rotation speed in degrees per second around its local Y-axis
+    public Transform hand; // Reference to the hand Transform
+    public float speed = 10f; // Speed of the projectile
+    public float returnDelay = 0.5f; // Delay before returning to the hand
+    public float projectileHeight = 1f; // Height at which the projectile should move
+    public Color rayColor = Color.red; // Color of the debug ray
 
-    private Vector3 initialRelativePosition; // Initial position relative to the player
-    private Quaternion initialRelativeRotation; // Initial rotation relative to the player
-    private bool isReturning = false; // Flag to control the return phase
+    private Vector3 targetPosition;
+    private bool isReturning = false;
+    private bool isFlying = false;
+
+    public float forcefactor = 12f;
+
+    public int damgeAmount = 15;
+
+    private Vector3 initialLocalPosition;
+    private Quaternion initialLocalRotation;
 
     void Start()
     {
-        // Store the initial relative position and rotation to the player at the start
-        initialRelativePosition = transform.localPosition;
-        initialRelativeRotation = transform.localRotation;
+        // Save the initial local position and rotation relative to the hand
+        initialLocalPosition = transform.localPosition;
+        initialLocalRotation = transform.localRotation;
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isReturning) // Left mouse button to throw
+        if (Input.GetMouseButtonDown(0) && !isFlying)
         {
-            StartCoroutine(ThrowBoomerang());
+            // Calculate target position in world space
+            targetPosition = GetMouseWorldPosition();
+            isFlying = true;
+            transform.SetParent(null); // Detach from hand to move freely
         }
 
-        if (isReturning)
+        if (isFlying)
         {
-            UpdateReturnPosition();
+            if (!isReturning)
+            {
+                // Look at the target position and move towards it
+                Vector3 adjustedTargetPosition = new Vector3(targetPosition.x, projectileHeight, targetPosition.z);
+                transform.LookAt(adjustedTargetPosition);
+                transform.position = Vector3.MoveTowards(transform.position, adjustedTargetPosition, speed * Time.deltaTime);
+
+                Debug.DrawLine(transform.position, adjustedTargetPosition, rayColor);
+
+                if (Vector3.Distance(transform.position, adjustedTargetPosition) < 0.1f)
+                {
+                    isReturning = true;
+                    Invoke("ReturnToHand", returnDelay);
+                }
+            }
+            else
+            {
+                // Look at the hand position and move back to it
+                Vector3 adjustedHandPosition = new Vector3(hand.position.x, projectileHeight, hand.position.z);
+                transform.LookAt(adjustedHandPosition);
+                transform.position = Vector3.MoveTowards(transform.position, adjustedHandPosition, speed * Time.deltaTime);
+
+                Debug.DrawLine(transform.position, adjustedHandPosition, rayColor);
+
+                if (Vector3.Distance(transform.position, adjustedHandPosition) < 0.1f)
+                {
+                    isFlying = false;
+                    isReturning = false;
+                    transform.SetParent(hand);
+                    // Return to the initial local position and rotation
+                    transform.localPosition = initialLocalPosition;
+                    transform.localRotation = initialLocalRotation;
+                }
+            }
         }
     }
 
-    IEnumerator ThrowBoomerang()
+    private Vector3 GetMouseWorldPosition()
     {
-        // Calculate the target point based on the mouse position
+        // Convert mouse position to world position
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            Vector3 targetPoint = hit.point;
-            targetPoint.y = playerTransform.position.y + initialRelativePosition.y; // Maintain the initial relative height
+            return new Vector3(hit.point.x, projectileHeight, hit.point.z);
+        }
+        return new Vector3(transform.position.x, projectileHeight, transform.position.z);
+    }
 
-            // Move towards the target point
-            yield return FlyToTarget(targetPoint);
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isFlying && other.CompareTag("Enemy")&& other.gameObject.layer == LayerMask.NameToLayer("Hittable"))
+        {
+            // Handle hit on enemy
+            //Debug.Log("Hit an enemy: " + other.name);
+            // Optionally, add logic to damage the enemy or perform other actions
+            EnemyController enemy = other.GetComponent<EnemyController>();
+            RangedEnemyController rangedEnemy = other.GetComponent<RangedEnemyController>();
+            if (enemy != null) {
+        Vector3 pushDirection = (other.transform.position - transform.position).normalized;
+        
+        enemy.ApplyPushback(pushDirection * forcefactor);
+    }
+        if(rangedEnemy != null) {
+            Vector3 pushDirection = (other.transform.position - transform.position).normalized;
+            
+            rangedEnemy.ApplyPushback(pushDirection * forcefactor);
+        }
+            other.GetComponent<Health>().TakeDamage(damgeAmount);
 
-            // Start returning after reaching the target
-            isReturning = true;
+            // Start returning to hand immediately after hitting an enemy
+            //isReturning = true;
+            //Invoke("ReturnToHand", returnDelay);
         }
     }
 
-    void UpdateReturnPosition()
+    private void ReturnToHand()
     {
-        Vector3 returnPosition = playerTransform.position + initialRelativePosition;
-        returnPosition.y = playerTransform.position.y + initialRelativePosition.y; // Maintain the initial relative height
-
-        transform.position = Vector3.MoveTowards(transform.position, returnPosition, speed * Time.deltaTime);
-        transform.localRotation = Quaternion.RotateTowards(transform.localRotation, initialRelativeRotation, rotationSpeed * Time.deltaTime);
-
-        // Stop the return if close enough to the return position
-        if (Vector3.Distance(transform.position, returnPosition) < 0.1f)
-        {
-            isReturning = false;
-            transform.localPosition = initialRelativePosition; // Snap to the initial relative position
-            transform.localRotation = initialRelativeRotation; // Snap to the initial relative rotation
-        }
-    }
-
-    IEnumerator FlyToTarget(Vector3 target)
-    {
-        Vector3 startPosition = transform.position;
-        float journeyLength = Vector3.Distance(startPosition, target);
-        float journeyDuration = journeyLength / speed;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < journeyDuration)
-        {
-            float t = elapsedTime / journeyDuration;
-            transform.position = Vector3.Lerp(startPosition, target, t);
-           // transform.Rotate(0, rotationSpeed * Time.deltaTime, 0, Space.Self);  // Rotate around local Y-axis
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        transform.position = target;  // Ensure the boomerang reaches the target position
+        isReturning = true;
     }
 }
