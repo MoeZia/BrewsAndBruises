@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using UnityEditor.UI;
 
 public class RangedEnemyController : MonoBehaviour
 {
@@ -129,7 +130,9 @@ public class RangedEnemyController : MonoBehaviour
 
         // Instantiate and shoot the projectile
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-        projectile.GetComponent<Projectile>().SetTarget(player); // Assuming the projectile has a method to set its target
+         projectile.GetComponent<Projectile>().SetTarget(player);
+         projectile.GetComponent<Projectile>().origin = gameObject;
+         // Assuming the projectile has a method to set its target
 
         agent.isStopped = false; // Allow the agent to resume moving
     }

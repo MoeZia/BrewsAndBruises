@@ -1830,6 +1830,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 209845384056392513, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
+      propertyPath: m_TagString
+      value: ShootAt
+      objectReference: {fileID: 0}
     - target: {fileID: 816992169309703275, guid: 9ac6391ed8514d11a971e106100e1f18, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.815
@@ -6443,6 +6447,8 @@ MonoBehaviour:
   returnDelay: 0.5
   projectileHeight: 5
   rayColor: {r: 1, g: 0, b: 0, a: 1}
+  forcefactor: 12
+  damgeAmount: 15
 --- !u!4 &839026983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0001ef2c9558aba49a7eb3ef1ad3b64d, type: 3}

@@ -119,10 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57302978e931194e96509f4a3b8f9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 14
   damage: 10
-  lifetime: 5
+  lifetime: 4
   homingSensitivity: 0.2
+  origin: {fileID: 0}
+  correction: 1.25
 --- !u!54 &1179602475975853855
 Rigidbody:
   m_ObjectHideFlags: 0
