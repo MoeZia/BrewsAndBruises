@@ -26,6 +26,11 @@ public class InputControllerDiab : MonoBehaviour
     [SerializeField]
     public bool isBlocking = false; // Public field for blocking state
 
+    public GameObject mousePointer;
+    private GameObject currentPointer;
+
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -76,6 +81,7 @@ public class InputControllerDiab : MonoBehaviour
             {
                 targetPosition = hit.point;
                 isMoving = true;
+                addMousePointer(targetPosition);
                 OnRunForward?.Invoke();
             }
         }
@@ -183,4 +189,11 @@ public class InputControllerDiab : MonoBehaviour
     {
         return Vector3.Distance(transform.position, targetPosition) < 0.5f;
     }
+    private void addMousePointer(Vector3 position){
+    // We have to make sure that only one pointer exist.
+    if(currentPointer) {
+        Destroy(currentPointer);
+    }
+    currentPointer = Instantiate(mousePointer, targetPosition, Quaternion.identity);
+}
 }
