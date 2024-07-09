@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657832, g: 0.49641222, b: 0.57481664, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6443,6 +6443,8 @@ MonoBehaviour:
   returnDelay: 0.5
   projectileHeight: 5
   rayColor: {r: 1, g: 0, b: 0, a: 1}
+  forcefactor: 12
+  damgeAmount: 15
 --- !u!4 &839026983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0001ef2c9558aba49a7eb3ef1ad3b64d, type: 3}
@@ -8309,6 +8311,7 @@ MonoBehaviour:
       m_Calls: []
   isMoving: 0
   isBlocking: 0
+  mousePointer: {fileID: 4446204811614029107, guid: 6c9bc8339af1e33d3b5739e44dfdb63f, type: 3}
 --- !u!4 &1114536047 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0a4e70f10d5ae9643878997861cd8b80, type: 3}
