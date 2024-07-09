@@ -191,9 +191,15 @@ public class InputControllerDiab : MonoBehaviour
     }
     private void addMousePointer(Vector3 position){
     // We have to make sure that only one pointer exist.
+
+    // move the mousepointer little up ;) 
+
+    // also why not move the mouse pointer if it exists ? now you are creating a lot of garbage 
+    position.y += 0.1f;
+
     if(currentPointer) {
         Destroy(currentPointer);
     }
-    currentPointer = Instantiate(mousePointer, targetPosition, Quaternion.identity);
+    currentPointer = Instantiate(mousePointer, position, Quaternion.identity);
 }
 }
