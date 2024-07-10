@@ -137,13 +137,13 @@ public class PlayerController : MonoBehaviour
         switch (weapon)
         {
             case CombatModel.WeaponType.Mug:
-                animationController.TriggerAnimation("FistEquip");
+                //animationController.TriggerAnimation("FistEquip");
                 break;
             case CombatModel.WeaponType.Breze:
-                animationController.TriggerAnimation("TrumpetEquip");
+                //animationController.TriggerAnimation("TrumpetEquip");
                 break;
-            case CombatModel.WeaponType.Whip:
-                animationController.TriggerAnimation("WhipEquip");
+            case CombatModel.WeaponType.Trumpet:
+                //animationController.TriggerAnimation("WhipEquip");
                 break;
         }
     }
@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour
                     FindObjectOfType<AudioManager>().Play("brezel");
                     combatController.PerformAttack();
                     break;
-                case CombatModel.WeaponType.Whip:
+                case CombatModel.WeaponType.Trumpet:
                     animationController.TriggerAnimation("Whip"); 
                     FindObjectOfType<AudioManager>().Play("trumpet");
                     combatController.PerformAttack();

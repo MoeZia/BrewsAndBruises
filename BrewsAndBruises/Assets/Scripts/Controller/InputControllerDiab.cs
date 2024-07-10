@@ -120,30 +120,35 @@ public class InputControllerDiab : MonoBehaviour
     }
 
     private void HandleCombatInput()
+{
+    if (Input.GetKeyDown(KeyCode.Alpha1))
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            OnWeaponChange?.Invoke(CombatModel.WeaponType.Mug);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            OnWeaponChange?.Invoke(CombatModel.WeaponType.Breze);
-        }
-
-        // Check for attack input
-        if (Input.GetMouseButtonDown(0)&&!isBlocking) // Left mouse button for attack
-        {
-            // Determine target position from mouse click
-            Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray2, out RaycastHit hit, 100))
-            {
-                Vector3 direction = (hit.point - transform.position).normalized;
-                RotateTowards(direction); // Rotate towards the target position on attack
-            }
-
-            OnAttack?.Invoke();
-        }
+        OnWeaponChange?.Invoke(CombatModel.WeaponType.Mug);
     }
+    if (Input.GetKeyDown(KeyCode.Alpha2))
+    {
+        OnWeaponChange?.Invoke(CombatModel.WeaponType.Breze);
+    }
+    if (Input.GetKeyDown(KeyCode.Alpha3))
+    {
+        OnWeaponChange?.Invoke(CombatModel.WeaponType.Trumpet);
+    }
+
+    // Check for attack input
+    if (Input.GetMouseButtonDown(0) && !isBlocking) // Left mouse button for attack
+    {
+        // Determine target position from mouse click
+        Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray2, out RaycastHit hit, 100))
+        {
+            Vector3 direction = (hit.point - transform.position).normalized;
+            RotateTowards(direction); // Rotate towards the target position on attack
+        }
+
+        OnAttack?.Invoke();
+    }
+}
+
 
     private void HandleBlockingInput()
     {
@@ -199,7 +204,7 @@ public class InputControllerDiab : MonoBehaviour
 
     if(currentPointer) {
         Destroy(currentPointer);
-    }
+    }// you where not using position but target !?
     currentPointer = Instantiate(mousePointer, position, Quaternion.identity);
 }
 }
