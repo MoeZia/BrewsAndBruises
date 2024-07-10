@@ -8,37 +8,37 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Character
-    second: {fileID: 2100000, guid: a94362a5189138940b963a44fd35e9f9, type: 2}
+    second: {fileID: 2100000, guid: 5fa3c575a56400c458d2148b3897e6f6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: eyelash
-    second: {fileID: 2100000, guid: 424d6721b08d45d4ab3468620f4cbea0, type: 2}
+    second: {fileID: 2100000, guid: 4ff77d3429919584f97a9ee900c3da69, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: eyes
-    second: {fileID: 2100000, guid: 72f6555d892438443aeca18f96c5060b, type: 2}
+    second: {fileID: 2100000, guid: dd68684a13f9ed344b6a0c381d52d267, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: eyesbase
-    second: {fileID: 2100000, guid: a45432bd9fe65ab44af0389dd15bffe3, type: 2}
+    second: {fileID: 2100000, guid: 1c9a057d59a56a74a9f5fd94e5163706, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: haare
-    second: {fileID: 2100000, guid: c27216e3b3daba6459271d2abcbbb666, type: 2}
+    second: {fileID: 2100000, guid: e6ad89a1fd23af842b20109c95edf2d4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: hat
-    second: {fileID: 2100000, guid: 9e7f4b9f20e18ff47a56526f33369669, type: 2}
+    second: {fileID: 2100000, guid: 4aa8615d3af89af46b0ad11c915723e4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: white
-    second: {fileID: 2100000, guid: f2caf8c20905eb945a066c3b64430d60, type: 2}
+    second: {fileID: 2100000, guid: dabb248ba88fa9147b9babaf456ca305, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
