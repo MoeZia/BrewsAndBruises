@@ -393,6 +393,7 @@
 "Assets/Scripts/Weapons/TrumpetWeapon.cs"
 "Assets/Scripts/WeaponUI.cs"
 "Assets/Scripts/WeaponUIController.cs"
+"Assets/StaminaHUD.cs"
 -langversion:9.0
 
 /deterministic

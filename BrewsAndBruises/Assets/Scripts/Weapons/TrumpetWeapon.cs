@@ -10,42 +10,36 @@ public class TrumpetWeapon : MonoBehaviour
     public int damage = 1;
     public float attackRange = 5f;
 
-    private float currentStamina;
-    public float maxStamina = 100f;
     private bool isAttacking = false;
+    private StaminaHUD staminaHUD;
 
     void Start()
     {
-        currentStamina = maxStamina;
+        staminaHUD = FindObjectOfType<StaminaHUD>(); // Find the StaminaHUD in the scene
     }
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && currentStamina > 0)
+        if (Input.GetButton("Fire1") && !isAttacking && staminaHUD.UseStamina(staminaCostPerSecond * Time.deltaTime))
         {
             StartAttack();
         }
-        else
+        else if (!Input.GetButton("Fire1"))
         {
             StopAttack();
         }
 
         if (isAttacking)
         {
-            currentStamina -= staminaCostPerSecond * Time.deltaTime;
-            if (currentStamina <= 0)
+            if (!staminaHUD.UseStamina(staminaCostPerSecond * Time.deltaTime))
             {
-                currentStamina = 0;
                 StopAttack();
             }
             ApplyDamageAndPushBack();
         }
-
-        // Regenerate stamina over time or other stamina management
-        currentStamina = Mathf.Min(maxStamina, currentStamina + Time.deltaTime * 5); // example regeneration rate
     }
 
-    void StartAttack()
+    public void StartAttack()
     {
         if (!isAttacking)
         {
@@ -54,7 +48,7 @@ public class TrumpetWeapon : MonoBehaviour
         }
     }
 
-    void StopAttack()
+    public void StopAttack()
     {
         if (isAttacking)
         {
@@ -77,26 +71,27 @@ public class TrumpetWeapon : MonoBehaviour
                     enemyH.TakeDamage(damage);
                 }
 
-            EnemyController enemy = hitCollider.GetComponent<EnemyController>();
-            RangedEnemyController rangedEnemy = hitCollider.GetComponent<RangedEnemyController>();
-            if (enemy != null) {
-                Vector3 pushDirection = (hitCollider.transform.position - transform.position).normalized;
-                enemy.ApplyPushback(pushDirection * pushBackForce);
-            }
+                EnemyController enemy = hitCollider.GetComponent<EnemyController>();
+                RangedEnemyController rangedEnemy = hitCollider.GetComponent<RangedEnemyController>();
+                if (enemy != null)
+                {
+                    Vector3 pushDirection = (hitCollider.transform.position - transform.position).normalized;
+                    enemy.ApplyPushback(pushDirection * pushBackForce);
+                }
 
-            if(rangedEnemy != null) {
-                Vector3 pushDirection = (hitCollider.transform.position - transform.position).normalized;
-                rangedEnemy.ApplyPushback(pushDirection * pushBackForce);
+                if (rangedEnemy != null)
+                {
+                    Vector3 pushDirection = (hitCollider.transform.position - transform.position).normalized;
+                    rangedEnemy.ApplyPushback(pushDirection * pushBackForce);
+                }
             }
         }
     }
-}
 
-    void OnDrawGizmosSelected()
+   public void OnDrawGizmosSelected()
     {
         // Display the attack range in the editor
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
-

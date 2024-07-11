@@ -5816,6 +5816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 748342411}
   - component: {fileID: 748342412}
+  - component: {fileID: 748342413}
   m_Layer: 0
   m_Name: StaminaBar
   m_TagString: StaminaBar
@@ -5895,6 +5896,22 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &748342413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748342410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7f78bf03fdcc040bcb74dd1a5eda8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 748342412}
+  camera: {fileID: 0}
+  target: {fileID: 0}
+  maxStamina: 100
 --- !u!1001 &749055292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8320,6 +8337,8 @@ MonoBehaviour:
   isMoving: 0
   isBlocking: 0
   mousePointer: {fileID: 8176585035814061160, guid: 2e401848fc0f8e460b37663a86f937c3, type: 3}
+  staminaHUD: {fileID: 748342413}
+  trumpetWeapon: {fileID: 1325352919}
 --- !u!4 &1114536047 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 0a4e70f10d5ae9643878997861cd8b80, type: 3}
@@ -9879,11 +9898,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDuration: 1
-  staminaCostPerSecond: 10
+  staminaCostPerSecond: 33
   pushBackForce: 10
-  damage: 10
+  damage: 1
   attackRange: 5
-  maxStamina: 100
 --- !u!1001 &1331926583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15508,7 +15526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8045485455154590552, guid: 9a7fcac6e3b11e3ca8331a14acbd93dd, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
