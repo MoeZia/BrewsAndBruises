@@ -41,6 +41,12 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadSceneAsync("Game");
     }
 
+    public void Tutorial()
+    {
+        FindObjectOfType<AudioManager>().Play("click");
+        SceneManager.LoadSceneAsync("Tutorial");
+    }
+
     public void QuitGame()
     {
         FindObjectOfType<AudioManager>().Play("click");
