@@ -9,7 +9,7 @@ public class StaminaHUD : MonoBehaviour
     [SerializeField] private CombatModel combatModel; // Reference to your combat model
 
     [SerializeField] private float maxStamina = 100f;
-    private float currentStamina;
+    public float currentStamina;
     [SerializeField] private float staminaRecoveryRate = 5f; // Stamina recovered per second
 
     private void Start()

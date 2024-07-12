@@ -11,6 +11,16 @@ public class PlayerController : MonoBehaviour
 
     private string playerID;
 
+    public float maxHealth = 100f;
+    public float maxStamina = 100f;
+    private float currentHealth;
+    private float currentStamina;
+    public float moveSpeed = 5f;
+
+    private bool isSpeedBoostActive = false;
+    private float originalMoveSpeed;
+    private float speedBoostEndTime;
+
     void Start()
     {
         animationController = GetComponent<AnimationController>();
@@ -58,6 +68,50 @@ public class PlayerController : MonoBehaviour
        /// and then we dont have to search every time we want to play a sound or stop a sound
 
         
+    }
+    void Update()
+    {
+        if (isSpeedBoostActive && Time.time > speedBoostEndTime)
+        {
+            EndSpeedBoost();
+        }
+
+    }
+
+    public void IncreaseHealth(float amount)
+    {
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        health.Heal((int)currentHealth);
+       
+    }
+
+    public void IncreaseStamina(float amount)
+    {
+        currentStamina = Mathf.Min(currentStamina + amount, maxStamina);
+        // Assuming you have a stamina HUD or system to update the UI
+        FindObjectOfType<StaminaHUD>().RecoverStamina(currentStamina);
+        
+    }
+
+    public void StartSpeedBoost(float speedMultiplier, float duration)
+    {
+        if (!isSpeedBoostActive)
+        {
+            originalMoveSpeed = moveSpeed;
+            moveSpeed *= speedMultiplier;
+            isSpeedBoostActive = true;
+            speedBoostEndTime = Time.time + duration;
+            inputController.UpdateMoveSpeed(moveSpeed);
+            
+        }
+    }
+
+    private void EndSpeedBoost()
+    {
+        moveSpeed = originalMoveSpeed;
+        isSpeedBoostActive = false;
+        inputController.UpdateMoveSpeed(moveSpeed);
+        Debug.Log("Speed boost ended. Move speed reset to " + moveSpeed);
     }
 
     void RunForward()

@@ -13,22 +13,25 @@ public class Boomerang : MonoBehaviour
     private bool isFlying = false;
 
     public float forcefactor = 12f;
-
     public int damgeAmount = 15;
+    public float staminaCost = 34f; // Stamina cost for throwing the boomerang
 
     private Vector3 initialLocalPosition;
     private Quaternion initialLocalRotation;
+
+    private StaminaHUD staminaHUD; // Reference to the StaminaHUD
 
     void Start()
     {
         // Save the initial local position and rotation relative to the hand
         initialLocalPosition = transform.localPosition;
         initialLocalRotation = transform.localRotation;
+        staminaHUD = FindObjectOfType<StaminaHUD>(); // Find the StaminaHUD in the scene
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isFlying)
+        if (Input.GetMouseButtonDown(0) && !isFlying && staminaHUD.UseStamina(staminaCost))
         {
             // Calculate target position in world space
             targetPosition = GetMouseWorldPosition();
@@ -88,28 +91,22 @@ public class Boomerang : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isFlying && other.CompareTag("Enemy")&& other.gameObject.layer == LayerMask.NameToLayer("Hittable"))
+        if (isFlying && other.CompareTag("Enemy") && other.gameObject.layer == LayerMask.NameToLayer("Hittable"))
         {
             // Handle hit on enemy
-            //Debug.Log("Hit an enemy: " + other.name);
-            // Optionally, add logic to damage the enemy or perform other actions
             EnemyController enemy = other.GetComponent<EnemyController>();
             RangedEnemyController rangedEnemy = other.GetComponent<RangedEnemyController>();
-            if (enemy != null) {
-        Vector3 pushDirection = (other.transform.position - transform.position).normalized;
-        
-        enemy.ApplyPushback(pushDirection * forcefactor);
-    }
-        if(rangedEnemy != null) {
-            Vector3 pushDirection = (other.transform.position - transform.position).normalized;
-            
-            rangedEnemy.ApplyPushback(pushDirection * forcefactor);
-        }
+            if (enemy != null)
+            {
+                Vector3 pushDirection = (other.transform.position - transform.position).normalized;
+                enemy.ApplyPushback(pushDirection * forcefactor);
+            }
+            if (rangedEnemy != null)
+            {
+                Vector3 pushDirection = (other.transform.position - transform.position).normalized;
+                rangedEnemy.ApplyPushback(pushDirection * forcefactor);
+            }
             other.GetComponent<Health>().TakeDamage(damgeAmount);
-
-            // Start returning to hand immediately after hitting an enemy
-            //isReturning = true;
-            //Invoke("ReturnToHand", returnDelay);
         }
     }
 

@@ -230,4 +230,8 @@ public class InputControllerDiab : MonoBehaviour
         }
         currentPointer = Instantiate(mousePointer, position, Quaternion.identity);
     }
+    public void UpdateMoveSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
 }

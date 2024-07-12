@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrumpetWeapon : MonoBehaviour
 {
     public float attackDuration = 1.0f;
-    public float staminaCostPerSecond = 10f;
+    public float staminaCostPerSecond = 34f;
     public float pushBackForce = 10f;
     public int damage = 1;
     public float attackRange = 5f;
@@ -41,7 +41,7 @@ public class TrumpetWeapon : MonoBehaviour
 
     public void StartAttack()
     {
-        if (!isAttacking)
+        if (!isAttacking&& staminaHUD.currentStamina > 10)
         {
             isAttacking = true;
             // Add visual/audio effects for starting the attack
@@ -88,7 +88,7 @@ public class TrumpetWeapon : MonoBehaviour
         }
     }
 
-   public void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()
     {
         // Display the attack range in the editor
         Gizmos.color = Color.red;
