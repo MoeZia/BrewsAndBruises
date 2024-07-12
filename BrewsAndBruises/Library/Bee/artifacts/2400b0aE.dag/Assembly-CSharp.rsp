@@ -354,6 +354,8 @@
 -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"/home/dominik/Unity/Hub/Editor/2022.3.18f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"/home/dominik/Unity/Hub/Editor/2022.3.18f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+"Assets/BrokenVector/LowPolyFencePack/Scripts/DoorController.cs"
+"Assets/BrokenVector/LowPolyFencePack/Scripts/DoorToggle.cs"
 "Assets/CameraFollow.cs"
 "Assets/GameController.cs"
 "Assets/PowerUp.cs"
