@@ -24,11 +24,14 @@ public class EnemyController : MonoBehaviour
 
     public int damage = 10; // Damage value for the enemy attack
 
+    private AudioManager audioManager;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        audioManager = FindObjectOfType<AudioManager>();
         animationController = GetComponent<AnimationController>();
         health = GetComponent<Health>();
         animationController.RegisterAnimation("Walking", false);
@@ -137,6 +140,7 @@ public class EnemyController : MonoBehaviour
 
     private void AttackPlayer(Collider playerCollider)
     {
+        audioManager.Play("enemy_slash");
         //animationController.TriggerAnimation("Attack");
         PlayerController PlayerController = playerCollider.GetComponent<PlayerController>();// Example knockback direction
         if(playerCollider.GetComponent<InputControllerDiab>().isBlocking==false){

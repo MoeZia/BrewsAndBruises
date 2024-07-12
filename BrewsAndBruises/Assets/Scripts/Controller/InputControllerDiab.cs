@@ -33,6 +33,7 @@ public class InputControllerDiab : MonoBehaviour
     [SerializeField] private TrumpetWeapon trumpetWeapon; // Reference to the TrumpetWeapon
 
     private CombatModel combatModel;
+    private AudioManager audioManager;
 
     void Start()
     {
@@ -40,6 +41,7 @@ public class InputControllerDiab : MonoBehaviour
         animationController = GetComponent<AnimationController>();
         InitializeEvents();
         combatModel = new CombatModel(); // Initialize CombatModel
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -85,6 +87,7 @@ public class InputControllerDiab : MonoBehaviour
                 targetPosition = hit.point;
                 isMoving = true;
                 addMousePointer(targetPosition);
+                audioManager.Play("click");
                 OnRunForward?.Invoke();
             }
         }
@@ -128,16 +131,20 @@ public class InputControllerDiab : MonoBehaviour
         {
             OnWeaponChange?.Invoke(CombatModel.WeaponType.Mug);
             combatModel.SetWeapon(CombatModel.WeaponType.Mug);
+            audioManager.Play("rascheln");
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             OnWeaponChange?.Invoke(CombatModel.WeaponType.Breze);
             combatModel.SetWeapon(CombatModel.WeaponType.Breze);
+            audioManager.Play("rascheln");
+
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             OnWeaponChange?.Invoke(CombatModel.WeaponType.Trumpet);
             combatModel.SetWeapon(CombatModel.WeaponType.Trumpet);
+            audioManager.Play("rascheln");
         }
 
         // Check for attack input

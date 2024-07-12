@@ -12,10 +12,12 @@ public class TrumpetWeapon : MonoBehaviour
 
     private bool isAttacking = false;
     private StaminaHUD staminaHUD;
+    private AudioManager audioManager;
 
     void Start()
     {
         staminaHUD = FindObjectOfType<StaminaHUD>(); // Find the StaminaHUD in the scene
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -45,6 +47,7 @@ public class TrumpetWeapon : MonoBehaviour
         {
             isAttacking = true;
             // Add visual/audio effects for starting the attack
+            audioManager.Play("trumpet");
         }
     }
 
@@ -54,6 +57,7 @@ public class TrumpetWeapon : MonoBehaviour
         {
             isAttacking = false;
             // Add visual/audio effects for stopping the attack
+            audioManager.Stop("trumpet");
         }
     }
 

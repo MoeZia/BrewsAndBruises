@@ -21,12 +21,15 @@ public class PlayerController : MonoBehaviour
     private float originalMoveSpeed;
     private float speedBoostEndTime;
 
+    private AudioManager audioManager;
+
     void Start()
     {
         animationController = GetComponent<AnimationController>();
         health = GetComponent<Health>();
         inputController = GetComponent<InputControllerDiab>();
         combatController = GetComponent<CombatController>();
+        audioManager = FindObjectOfType<AudioManager>();
 
         health.Initialize(100);
         playerID = health.GetID();
@@ -54,20 +57,6 @@ public class PlayerController : MonoBehaviour
         animationController.RegisterAnimation("Fist", true);
         animationController.RegisterAnimation("Trumpet", true);
         animationController.RegisterAnimation("Whip", true); // Assuming you add this
-
-        /// Register all sounds with the Audio Manager
-        /// FindObjectOfType<AudioManager>().Play("running");
-        /// FindObjectOfType<AudioManager>().Play("glassHit");
-        /// FindObjectOfType<AudioManager>().Play("brezel");
-        /// FindObjectOfType<AudioManager>().Play("trumpet");
-        /// FindObjectOfType<AudioManager>().Play("lose");
-        /// FindObjectOfType<AudioManager>().Play("BackgroundMusic");
-        /// FindObjectOfType<AudioManager>().Play("BackgroundPeople");
-       // This is pretty intensive, becase it needs to be searched for every time so lets make a link to the Audio manager on start..
-       AudioManager audioManager = FindObjectOfType<AudioManager>();
-       /// and then we dont have to search every time we want to play a sound or stop a sound
-
-        
     }
     void Update()
     {
@@ -121,7 +110,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         animationController.TriggerAnimation("RunForward");
-        FindObjectOfType<AudioManager>().Play("running");
+        audioManager.Play("running");
     }
 
     void RotateLeft()
@@ -148,7 +137,7 @@ public class PlayerController : MonoBehaviour
     void Idle()
     {
         animationController.TriggerAnimation("Idle");
-        FindObjectOfType<AudioManager>().Stop("running");
+        audioManager.Stop("running");
     }
 
     public void TakeDamage(int damage)
@@ -165,9 +154,9 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log($"Player with ID {id} died");
         GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
-        FindObjectOfType<AudioManager>().Stop("BackgroundMusic");
-        FindObjectOfType<AudioManager>().Stop("BackgroundPeople");
-        FindObjectOfType<AudioManager>().Play("lose");
+        audioManager.Stop("BackgroundMusic");
+        audioManager.Stop("BackgroundPeople");
+        audioManager.Play("lose");
         SceneManager.LoadSceneAsync("Lose");
 
 
@@ -215,17 +204,16 @@ public class PlayerController : MonoBehaviour
                     break;
                     }
                     animationController.TriggerAnimation("Fist");
-                    FindObjectOfType<AudioManager>().Play("glassHit");
+                    audioManager.Play("glassHit");
                     combatController.PerformAttack();
                     break;
                 case CombatModel.WeaponType.Breze:
                     animationController.TriggerAnimation("Whip");
-                    FindObjectOfType<AudioManager>().Play("brezel");
+                    audioManager.Play("brezel");
                     combatController.PerformAttack();
                     break;
                 case CombatModel.WeaponType.Trumpet:
                     animationController.TriggerAnimation("Whip"); 
-                    FindObjectOfType<AudioManager>().Play("trumpet");
                     combatController.PerformAttack();
                     break;
             }

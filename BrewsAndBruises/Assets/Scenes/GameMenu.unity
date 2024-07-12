@@ -168,7 +168,7 @@ MonoBehaviour:
   sounds:
   - name: BackgroundMusic
     clip: {fileID: 8300000, guid: 3f4dbdb5587744ceb9f8ac13c3f914b9, type: 3}
-    volume: 0.51
+    volume: 0
     pitch: 0.99
     loop: 1
     source: {fileID: 0}
@@ -180,25 +180,25 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: running
     clip: {fileID: 8300000, guid: 2d32b5b2ccf974f8186393680aff1e6d, type: 3}
-    volume: 0.95
+    volume: 1.01
     pitch: 0.82
     loop: 1
     source: {fileID: 0}
   - name: glassHit
     clip: {fileID: 8300000, guid: ee59e12ab8c4a49f48b8128524c378e8, type: 3}
-    volume: 0.42
+    volume: 0.59
     pitch: 1.17
     loop: 0
     source: {fileID: 0}
   - name: trumpet
     clip: {fileID: 8300000, guid: eafb131be9b444814bcf7706cc03897f, type: 3}
-    volume: 0.51
+    volume: 0.71
     pitch: 1.04
     loop: 0
     source: {fileID: 0}
   - name: brezel
     clip: {fileID: 8300000, guid: 64fcbcbc9bbcb4b99971309dfcf8dfa1, type: 3}
-    volume: 0.64
+    volume: 0.79
     pitch: 1.04
     loop: 0
     source: {fileID: 0}
@@ -225,6 +225,18 @@ MonoBehaviour:
     volume: 0.47
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: rascheln
+    clip: {fileID: 8300000, guid: 0d011762781624402a0478ea877d346c, type: 3}
+    volume: 5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: applaus
+    clip: {fileID: 8300000, guid: 9fb363006c5f6434da39fa95a2020a59, type: 3}
+    volume: 0.67
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
 --- !u!4 &5631186
 Transform:
