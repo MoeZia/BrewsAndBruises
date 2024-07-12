@@ -238,6 +238,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: enemy_slash
+    clip: {fileID: 8300000, guid: 22e09b4e9b514492bbbaec61c9038c18, type: 3}
+    volume: 0.67
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &5631186
 Transform:
   m_ObjectHideFlags: 0
