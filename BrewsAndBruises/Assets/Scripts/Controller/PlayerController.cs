@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private float originalMoveSpeed;
     private float speedBoostEndTime;
 
+    private CameraFollow CameraFollow;
+
     private AudioManager audioManager;
 
     void Start()
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
         inputController = GetComponent<InputControllerDiab>();
         combatController = GetComponent<CombatController>();
         audioManager = FindObjectOfType<AudioManager>();
+        CameraFollow = FindObjectOfType<CameraFollow>();
 
         health.Initialize(100);
         playerID = health.GetID();
@@ -60,6 +63,12 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        //check if Health has changes
+        if (currentHealth < health.GetCurrentHealth())
+        {
+            currentHealth = health.GetCurrentHealth();
+            CameraFollow.Hitshake();
+        }
         if (isSpeedBoostActive && Time.time > speedBoostEndTime)
         {
             EndSpeedBoost();

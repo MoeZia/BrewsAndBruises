@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -18,4 +19,24 @@ public class CameraFollow : MonoBehaviour
         // Keep the camera looking at the player
         transform.LookAt(target);
     }
+    public void Hitshake()
+    {
+        // Shake the camera when the player is hit
+        StartCoroutine(Shake(0.15f, 1f));
+    }
+    //shake the camera
+    IEnumerator Shake(float duration, float magnitude)
+    {
+        Vector3 originalPos = offset;
+        float elapsed = 0.0f;
+        while (elapsed < duration)
+        {
+            offset = originalPos + new Vector3(0,0, Random.Range(-1f, 1f) * magnitude);
+            elapsed += Time.deltaTime;
+           yield return null;
+           
+        }
+        offset = originalPos;
+    }
+    
 }
