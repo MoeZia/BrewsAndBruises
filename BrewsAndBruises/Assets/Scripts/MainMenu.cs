@@ -15,6 +15,11 @@ public class MainMenu : MonoBehaviour
         {
             StartCoroutine(PlayMenuWithDelay(5f)); // 5 Sekunden Verzögerung
         }
+        if (currentScene.name == "Win")
+        {
+            FindObjectOfType<AudioManager>().Play("applaus");
+            StartCoroutine(PlayMenuWithDelay(7f));
+        }
         else
         {
             // In anderen Szenen sofort abspielen
@@ -39,6 +44,12 @@ public class MainMenu : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("BackgroundPeople");
 
         SceneManager.LoadSceneAsync("Game");
+    }
+
+    public void Tutorial()
+    {
+        FindObjectOfType<AudioManager>().Play("click");
+        SceneManager.LoadSceneAsync("Tutorial");
     }
 
     public void QuitGame()

@@ -9,6 +9,11 @@ public class Projectile : MonoBehaviour
 
     private Transform target;
     private Vector3 initialDirection;
+    private Vector3 correctedTargetPosition;
+    
+    public GameObject origin; // Store the corrected target position
+
+    public float correction = 0.0f;
 
     void Start()
     {
@@ -18,7 +23,7 @@ public class Projectile : MonoBehaviour
         // Set the initial direction towards the target
         if (target != null)
         {
-            initialDirection = (target.position - transform.position).normalized;
+            initialDirection = (correctedTargetPosition - transform.position).normalized;
         }
         else
         {
@@ -30,11 +35,15 @@ public class Projectile : MonoBehaviour
     {
         if (target != null)
         {
-            // Direction towards the target
-            Vector3 targetDirection = (target.position - transform.position).normalized;
+            // Direction towards the corrected target position
+            Vector3 targetDirection = (correctedTargetPosition - transform.position).normalized;
 
             // Interpolate between the current direction and the target direction
             initialDirection = Vector3.Lerp(initialDirection, targetDirection, homingSensitivity * Time.deltaTime).normalized;
+
+            // Draw a ray towards the corrected target direction for debugging
+            Ray ray = new Ray(transform.position, targetDirection);
+            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
         }
 
         // Move the projectile in the new direction
@@ -47,26 +56,38 @@ public class Projectile : MonoBehaviour
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
+
+        // Adjust the target position by adding the correction value to the y component
+        correctedTargetPosition = target.position;
+        correctedTargetPosition.y += correction;
     }
 
     void OnTriggerEnter(Collider other)
     {
+        /// make it reflect off 
+        
         // Check if the projectile hits the player
         if (other.CompareTag("Player"))
         {
             // Apply damage to the player
             Health playerHealth = other.GetComponent<Health>();
-            if (playerHealth != null)
+            if (playerHealth != null && other.GetComponent<InputControllerDiab>().isBlocking == false)
             {
                 playerHealth.TakeDamage(damage);
-                other.GetComponent<PlayerController>().KnockBackForce(transform.forward * 2);
+                other.GetComponent<PlayerController>().KnockBackForce(transform.forward * 3);
+            }
+            else
+            {
+                other.GetComponent<PlayerController>().KnockBackForce(transform.forward * 5);
             }
 
             // Destroy the projectile upon collision
             Destroy(gameObject);
-        }
+        }else if(other.gameObject != origin) {
+            // reflect off everything else .... einfalss winkel = ausfalss winkel
+            Vector3 reflect = Vector3.Reflect(initialDirection, other.transform.forward);
+            initialDirection = reflect;
 
-        
-        
+        }
     }
 }

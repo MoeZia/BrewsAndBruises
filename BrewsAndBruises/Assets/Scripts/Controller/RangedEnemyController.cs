@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using UnityEditor.UI;
 
 public class RangedEnemyController : MonoBehaviour
 {
@@ -129,7 +130,9 @@ public class RangedEnemyController : MonoBehaviour
 
         // Instantiate and shoot the projectile
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-        projectile.GetComponent<Projectile>().SetTarget(player); // Assuming the projectile has a method to set its target
+         projectile.GetComponent<Projectile>().SetTarget(player);
+         projectile.GetComponent<Projectile>().origin = gameObject;
+         // Assuming the projectile has a method to set its target
 
         agent.isStopped = false; // Allow the agent to resume moving
     }
@@ -161,6 +164,8 @@ public class RangedEnemyController : MonoBehaviour
     }
 
     private void ReenableNavMeshAgent()
+{
+    try
     {
         // Check if the position is still on the NavMesh
         NavMeshHit hit;
@@ -172,8 +177,32 @@ public class RangedEnemyController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Failed to find a valid NavMesh position near " + transform.position);
+            Debug.LogWarning("Failed to find a valid NavMesh position near " + transform.position);
             // Optionally include logic to handle cases where no valid NavMesh position is found
+            HandleInvalidNavMeshPosition();
         }
     }
+    catch (System.Exception ex)
+    {
+        Debug.LogError("An error occurred while trying to re-enable the NavMeshAgent: " + ex.Message);
+        // Optionally handle the exception in a specific way
+    }
+}
+
+private void HandleInvalidNavMeshPosition()
+{
+    // Implement logic to handle the situation where no valid NavMesh position is found
+    // For example, you could disable the agent, move to a default position, or take other actions
+    agent.enabled = false;
+    // Move to a safe position or take other appropriate action
+    transform.position = GetSafePosition();
+}
+
+private Vector3 GetSafePosition()
+{
+    // Return a default or safe position on the NavMesh
+    // This is just an example, you should implement it according to your game's needs
+    return new Vector3(1, 1, 1); // Example safe position
+}
+
 }

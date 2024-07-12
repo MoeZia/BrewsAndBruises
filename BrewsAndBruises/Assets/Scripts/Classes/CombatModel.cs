@@ -8,7 +8,7 @@ public class CombatModel
         None,
         Mug,
         Breze,
-        Whip
+        Trumpet
     }
 
     private WeaponType currentWeapon;
@@ -37,7 +37,7 @@ public class CombatModel
         // Initialize each weapon with its specific force and damage
         weaponsData.Add(WeaponType.Mug, new WeaponData(17.0f, 15));
         weaponsData.Add(WeaponType.Breze, new WeaponData(5.0f, 50));
-        weaponsData.Add(WeaponType.Whip, new WeaponData(2.0f, 20));
+        weaponsData.Add(WeaponType.Trumpet, new WeaponData(2.0f, 20));
         weaponsData.Add(WeaponType.None, new WeaponData(0.0f, 0));
     }
 

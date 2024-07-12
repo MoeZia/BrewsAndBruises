@@ -16,29 +16,44 @@ public class InputControllerDiab : MonoBehaviour
     public UnityEvent OnIdle;
     public UnityEvent<CombatModel.WeaponType> OnWeaponChange;
     public UnityEvent OnAttack;
+    public UnityEvent OnBlockStart;
+    public UnityEvent OnBlockEnd;
 
     private Vector3 targetPosition;
 
     [SerializeField]
     private bool isMoving = false;
+    [SerializeField]
+    public bool isBlocking = false; // Public field for blocking state
 
+    public GameObject mousePointer;
+    private GameObject currentPointer;
+
+    [SerializeField] private StaminaHUD staminaHUD; // Reference to the StaminaHUD
+    [SerializeField] private TrumpetWeapon trumpetWeapon; // Reference to the TrumpetWeapon
+
+    private CombatModel combatModel;
+    private AudioManager audioManager;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animationController = GetComponent<AnimationController>();
         InitializeEvents();
+        combatModel = new CombatModel(); // Initialize CombatModel
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
     {
         HandleCombatInput();
-
         HandleMovementInput();
+        HandleBlockingInput(); // Handle blocking input
 
-        if (isMoving&& !hasReachedTarget())
+        if (isMoving && !hasReachedTarget() && !isBlocking)
             MoveTowardsTarget();
-        else{
+        else
+        {
             isMoving = false;
         }
     }
@@ -57,17 +72,22 @@ public class InputControllerDiab : MonoBehaviour
         OnIdle ??= new UnityEvent();
         OnWeaponChange ??= new UnityEvent<CombatModel.WeaponType>();
         OnAttack ??= new UnityEvent();
+        OnBlockStart ??= new UnityEvent();
+        OnBlockEnd ??= new UnityEvent();
     }
 
     private void HandleMovementInput()
     {
-        if (Input.GetMouseButtonDown(1)) // Right mouse button for movement
+        if (Input.GetMouseButtonDown(1) && !isBlocking) // Right mouse button for movement
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100))
+            int layerMask = 1 << LayerMask.NameToLayer("Ground");
+            if (Physics.Raycast(ray, out RaycastHit hit, 100, layerMask))
             {
                 targetPosition = hit.point;
                 isMoving = true;
+                addMousePointer(targetPosition);
+                audioManager.Play("click");
                 OnRunForward?.Invoke();
             }
         }
@@ -77,11 +97,10 @@ public class InputControllerDiab : MonoBehaviour
             Vector3 direction = (targetPosition - transform.position).normalized;
             RotateTowards(direction);
         }
-        if (!isMoving&& animationController.IsAnimationFinished())
+        if (!isMoving && animationController.IsAnimationFinished() && !isBlocking)
         {
             OnIdle?.Invoke();
         }
-
 
         if (Input.GetKeyDown(KeyCode.Space)) // Handle jump
         {
@@ -94,7 +113,7 @@ public class InputControllerDiab : MonoBehaviour
     {
         Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         rb.MovePosition(newPosition);
-        if(animationController.IsInAnimationState("Fist")&& animationController.IsAnimationFinished())
+        if (animationController.IsInAnimationState("Fist") && animationController.IsAnimationFinished())
         {
             OnRunForward?.Invoke();
         }
@@ -107,37 +126,81 @@ public class InputControllerDiab : MonoBehaviour
     }
 
     private void HandleCombatInput()
-{
-    if (Input.GetKeyDown(KeyCode.Alpha1))
     {
-        OnWeaponChange?.Invoke(CombatModel.WeaponType.Mug);
-    }
-    if (Input.GetKeyDown(KeyCode.Alpha2))
-    {
-        OnWeaponChange?.Invoke(CombatModel.WeaponType.Breze);
-    }
-
-    // Check for attack input
-    if (Input.GetMouseButtonDown(0)) // Left mouse button for attack
-    {
-        // Determine target position from mouse click
-        Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray2, out RaycastHit hit, 100))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-        
-            Vector3 direction = (hit.point - transform.position).normalized;
-            // check if player looks in the right direction rotation TODO!!!
-            
-            
-            RotateTowards(direction); // Rotate towards the target position on attack
+            OnWeaponChange?.Invoke(CombatModel.WeaponType.Mug);
+            combatModel.SetWeapon(CombatModel.WeaponType.Mug);
+            audioManager.Play("rascheln");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            OnWeaponChange?.Invoke(CombatModel.WeaponType.Breze);
+            combatModel.SetWeapon(CombatModel.WeaponType.Breze);
+            audioManager.Play("rascheln");
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            OnWeaponChange?.Invoke(CombatModel.WeaponType.Trumpet);
+            combatModel.SetWeapon(CombatModel.WeaponType.Trumpet);
+            audioManager.Play("rascheln");
         }
 
-        OnAttack?.Invoke();
-      //  Debug.Log("Attack");
+        // Check for attack input
+        if (Input.GetMouseButtonDown(0) && !isBlocking) // Left mouse button for attack
+        {
+            if (combatModel.GetCurrentWeapon() == CombatModel.WeaponType.Trumpet)
+            {
+                trumpetWeapon.StartAttack(); // Start attack for trumpet
+            }
+            else
+            {
+                // Handle other weapon attacks here
+                float requiredStamina = 10f; // Default stamina usage
+                if (staminaHUD.UseStamina(requiredStamina))
+                {
+                    // Determine target position from mouse click
+                    Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray2, out RaycastHit hit, 100))
+                    {
+                        Vector3 direction = (hit.point - transform.position).normalized;
+                        RotateTowards(direction); // Rotate towards the target position on attack
+                    }
+
+                    OnAttack?.Invoke();
+                }
+                else
+                {
+                    Debug.Log("Not enough stamina to attack!");
+                }
+            }
+        }
+        else if (!Input.GetMouseButton(0) && combatModel.GetCurrentWeapon() == CombatModel.WeaponType.Trumpet)
+        {
+            trumpetWeapon.StopAttack(); // Stop attack for trumpet
+        }
     }
-}
 
-
+    private void HandleBlockingInput()
+    {
+        if (Input.GetKey(KeyCode.LeftShift)) // While Shift key is held down
+        {
+            if (!isBlocking)
+            {
+                isBlocking = true;
+                OnBlockStart?.Invoke();
+            }
+        }
+        else
+        {
+            if (isBlocking)
+            {
+                isBlocking = false;
+                OnBlockEnd?.Invoke();
+            }
+        }
+    }
 
     public void Jump()
     {
@@ -162,5 +225,20 @@ public class InputControllerDiab : MonoBehaviour
     private bool hasReachedTarget()
     {
         return Vector3.Distance(transform.position, targetPosition) < 0.5f;
+    }
+
+    private void addMousePointer(Vector3 position)
+    {
+        position.y += 0.1f;
+
+        if (currentPointer)
+        {
+            Destroy(currentPointer);
+        }
+        currentPointer = Instantiate(mousePointer, position, Quaternion.identity);
+    }
+    public void UpdateMoveSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
     }
 }

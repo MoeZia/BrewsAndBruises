@@ -44,12 +44,12 @@ public class GameController : MonoBehaviour
         prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(0,9,3);
         prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(0,9,4);
         prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(0,9,5);
-        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,0);
-        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,1);
-        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,2);
-        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,3);
-        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,4);
-        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,9,5);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,2,0);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,2,1);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,2,2);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,2,3);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,2,4);
+        prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,2,5);
        
        
 

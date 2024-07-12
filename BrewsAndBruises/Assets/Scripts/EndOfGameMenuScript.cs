@@ -22,10 +22,12 @@ public class EndOfGameMenuScript : MonoBehaviour
     }
 
     public void RestartGame() {
+        FindObjectOfType<AudioManager>().Play("click");
         SceneManager.LoadScene("Game");
     }
 
     public void BackToMenu() {
+        FindObjectOfType<AudioManager>().Play("click");
         SceneManager.LoadScene("GameMenu");
         
     }

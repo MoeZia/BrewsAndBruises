@@ -22,11 +22,16 @@ public class EnemyController : MonoBehaviour
     private Vector3 wanderPoint; // Point to wander to
     private float timer; // Timer for wandering
 
+    public int damage = 10; // Damage value for the enemy attack
+
+    private AudioManager audioManager;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        audioManager = FindObjectOfType<AudioManager>();
         animationController = GetComponent<AnimationController>();
         health = GetComponent<Health>();
         animationController.RegisterAnimation("Walking", false);
@@ -135,9 +140,18 @@ public class EnemyController : MonoBehaviour
 
     private void AttackPlayer(Collider playerCollider)
     {
+        audioManager.Play("enemy_slash");
         //animationController.TriggerAnimation("Attack");
-        playerCollider.GetComponent<PlayerController>().KnockBackForce(transform.forward * 2); // Example knockback direction
-        playerCollider.GetComponent<Health>().TakeDamage(10); // Example damage value
+        PlayerController PlayerController = playerCollider.GetComponent<PlayerController>();// Example knockback direction
+        if(playerCollider.GetComponent<InputControllerDiab>().isBlocking==false){
+            
+            playerCollider.GetComponent<Health>().TakeDamage(damage);
+            PlayerController.KnockBackForce(transform.forward * 4);
+
+        }else{
+            PlayerController.KnockBackForce(transform.forward * 8);
+        }
+        
     }
 
    public void ApplyPushback(Vector3 force)
@@ -161,6 +175,8 @@ public class EnemyController : MonoBehaviour
     }
 
     private void ReenableNavMeshAgent()
+{
+    try
     {
         // Check if the position is still on the NavMesh
         NavMeshHit hit;
@@ -172,10 +188,34 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Failed to find a valid NavMesh position near " + transform.position);
+            Debug.LogWarning("Failed to find a valid NavMesh position near " + transform.position);
             // Optionally include logic to handle cases where no valid NavMesh position is found
+            HandleInvalidNavMeshPosition();
         }
     }
+    catch (System.Exception ex)
+    {
+        Debug.LogError("An error occurred while trying to re-enable the NavMeshAgent: " + ex.Message);
+        // Optionally handle the exception in a specific way
+    }
+}
+
+private void HandleInvalidNavMeshPosition()
+{
+    // Implement logic to handle the situation where no valid NavMesh position is found
+    // For example, you could disable the agent, move to a default position, or take other actions
+    agent.enabled = false;
+    // Move to a safe position or take other appropriate action
+    transform.position = GetSafePosition();
+}
+
+private Vector3 GetSafePosition()
+{
+    // Return a default or safe position on the NavMesh
+    // This is just an example, you should implement it according to your game's needs
+    return new Vector3(1, 1, 1); // Example safe position
+}
+
 }
 
 

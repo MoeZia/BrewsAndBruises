@@ -21,7 +21,7 @@ public class CombatController : MonoBehaviour {
         // Assuming the names of the child GameObjects are "Fist", "Trumpet", "Whip"
         weaponObjects[CombatModel.WeaponType.Mug] = weaponsParent.Find("Mug").gameObject;
         weaponObjects[CombatModel.WeaponType.Breze] = weaponsParent.Find("Breze").gameObject;
-        weaponObjects[CombatModel.WeaponType.Whip] = weaponsParent.Find("Whip").gameObject;
+        weaponObjects[CombatModel.WeaponType.Trumpet] = weaponsParent.Find("Trumpet").gameObject;
 
         // Set all weapons inactive initially
         foreach (var weapon in weaponObjects.Values) {
@@ -55,7 +55,8 @@ public class CombatController : MonoBehaviour {
         return combatModel.GetCurrentWeapon();
     }
 
-    public void PerformAttack() {
+    public void PerformAttack() {// insure not to hit unlimited times ...
+    
     CombatModel.WeaponType currentWeapon = GetCurrentWeapon();
     GameObject activeWeapon = weaponObjects[currentWeapon];
     activeWeapon.SetActive(true);  // Ensure the weapon is active

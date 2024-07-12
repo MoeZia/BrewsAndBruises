@@ -12,6 +12,7 @@ TagManager:
   - GameMenu
   - AudioManager
   - StaminaBar
+  - ShootAt
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Hittable
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
