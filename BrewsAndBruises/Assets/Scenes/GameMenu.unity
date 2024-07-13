@@ -168,13 +168,13 @@ MonoBehaviour:
   sounds:
   - name: BackgroundMusic
     clip: {fileID: 8300000, guid: 3f4dbdb5587744ceb9f8ac13c3f914b9, type: 3}
-    volume: 0.45
+    volume: 0.18
     pitch: 0.99
     loop: 1
     source: {fileID: 0}
   - name: BackgroundPeople
     clip: {fileID: 8300000, guid: 64a36109e4f284c369ac60e4e4124452, type: 3}
-    volume: 0.64
+    volume: 0.6
     pitch: 0.99
     loop: 1
     source: {fileID: 0}
@@ -241,6 +241,12 @@ MonoBehaviour:
   - name: enemy_slash
     clip: {fileID: 8300000, guid: 22e09b4e9b514492bbbaec61c9038c18, type: 3}
     volume: 0.67
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: intro
+    clip: {fileID: 8300000, guid: 288c473e306f84560a0b35aef1c7cc4e, type: 3}
+    volume: 2.14
     pitch: 1
     loop: 0
     source: {fileID: 0}

@@ -10,7 +10,7 @@ public class AudioSound
 
     public AudioClip clip;
 
-    [Range(0f, 5f)]
+    [Range(0f, 10f)]
     public float volume;
 
     [Range(.1f, 3f)]

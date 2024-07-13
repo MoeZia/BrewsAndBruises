@@ -10,15 +10,16 @@ public class MainMenu : MonoBehaviour
         // Überprüfe die aktuelle Szene
         Scene currentScene = SceneManager.GetActiveScene();
 
+        FindObjectOfType<AudioManager>().Stop("intro");
         // Wenn die aktuelle Szene "Lose" ist, starte die Coroutine
         if (currentScene.name == "Lose")
         {
-            StartCoroutine(PlayMenuWithDelay(5f)); // 5 Sekunden Verzögerung
+            StartCoroutine(PlayMenuWithDelay(5f, "menu")); // 5 Sekunden Verzögerung
         }
-        if (currentScene.name == "Win")
+        else if (currentScene.name == "Win")
         {
             FindObjectOfType<AudioManager>().Play("applaus");
-            StartCoroutine(PlayMenuWithDelay(7f));
+            StartCoroutine(PlayMenuWithDelay(7f, "menu"));
         }
         else
         {
@@ -27,22 +28,23 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    IEnumerator PlayMenuWithDelay(float delay)
+    IEnumerator PlayMenuWithDelay(float delay, string songtitle)
     {
         // Warte die angegebene Zeit
         yield return new WaitForSeconds(delay);
 
         // Spiele den Sound ab
-        FindObjectOfType<AudioManager>().Play("menu");
+        FindObjectOfType<AudioManager>().Play(songtitle);
     }
 
     public void PlayGame()
     {
         FindObjectOfType<AudioManager>().Play("click");
         FindObjectOfType<AudioManager>().Stop("menu");
-        FindObjectOfType<AudioManager>().Play("BackgroundMusic");
         FindObjectOfType<AudioManager>().Play("BackgroundPeople");
-
+        FindObjectOfType<AudioManager>().Play("intro");
+        StartCoroutine(PlayMenuWithDelay(50f, "BackgroundMusic"));
+        
         SceneManager.LoadSceneAsync("Game");
     }
 
