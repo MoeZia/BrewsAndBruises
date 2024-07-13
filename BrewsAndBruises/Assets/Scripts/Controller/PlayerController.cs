@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour
                     break;
                 case CombatModel.WeaponType.Breze:
                     animationController.TriggerAnimation("Whip");
-                    audioManager.Play("brezel");
+                    //audioManager.Play("brezel");
                     combatController.PerformAttack();
                     break;
                 case CombatModel.WeaponType.Trumpet:

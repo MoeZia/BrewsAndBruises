@@ -15,8 +15,8 @@ public class EnemyController : MonoBehaviour
     private AnimationController animationController;
     private Health health;
 
-    public float attackRange = 2.0f; // Range within which the enemy can attack
-    private float attackCooldown = 4.0f; // Minimum time between attacks
+    public float attackRange = 3.0f; // Range within which the enemy can attack
+    private float attackCooldown = 2.0f; // Minimum time between attacks
     private float lastAttackTime = -4.0f; // Initialize to enable immediate attack
 
     private Vector3 wanderPoint; // Point to wander to
@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
         animationController = GetComponent<AnimationController>();
         health = GetComponent<Health>();
         animationController.RegisterAnimation("Walking", false);
-        animationController.RegisterAnimation("Attack", true);
+        animationController.RegisterAnimation("Attack", false);
         animationController.RegisterAnimation("BeingHit", true);
 
         if (rb == null) {
@@ -121,7 +121,7 @@ public class EnemyController : MonoBehaviour
     {
         agent.isStopped = true; // Stop the agent from moving
         animationController.TriggerAnimation("Attack"); // adding attack so he can also miss the player and not just hit him all the time
-        yield return new WaitForSeconds(2); // Wait for 2 seconds before checking and attacking
+        yield return new WaitForSeconds(1.3f); // Wait for 2 seconds before checking and attacking
 
         // Check for the player within attack range using Physics.OverlapSphere
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
@@ -206,7 +206,7 @@ private void HandleInvalidNavMeshPosition()
     // For example, you could disable the agent, move to a default position, or take other actions
     agent.enabled = false;
     // Move to a safe position or take other appropriate action
-    transform.position = GetSafePosition();
+    transform.position = transform.position;
 }
 
 private Vector3 GetSafePosition()
