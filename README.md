@@ -1,1 +1,4 @@
 # BrewsAndBruises
+
+## Introduction
+Jake Stevenson, ein Marketing Angestellter gucke nervös auf seine Uhr. Er kommt zu spät zu einem wichtigen Businessmeeting. Doch zuvor muss er das Oktoberfest überqueren. Jake bahnte sich seinen Weg durch die in Trachten gekleideten Menschenmassen. Links und rechts Stände mit Brezeln, Weißwurst und Weißbier. Von irgendwo war auch eine Trompete zu höheren. Das Gedrängel wurde immer dichter und Jake wurde von den Massen mitgetragen. Plötzlich blieb er stehen, als sich vor ihm eine Gruppe Jugendlicher aufbaute. Sie hielten sich mit Trinkspielen bei Laune. Auf einmal fing einer von hin an zu husten und sackte zu Boden. Im nächsten Moment sprang dieser schreiend auf, um auf seine Gegenüber loszugehen und sie zu beißen wie ein tollwütiger Hund. Das Bier war schlecht. Jake erschrak, denn jetzt zeigten auch andere Menschen dieses Verhalten. Zombies! Jack muss hier weg, er muss schnell vom Oktoberfest entkommen.
