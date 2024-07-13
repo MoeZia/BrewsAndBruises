@@ -10,6 +10,8 @@ public class RangedEnemyController : MonoBehaviour
     public float wanderRadius = 20f; // Radius within which the enemy will wander
     public float wanderTimer = 5f; // Time to wait at each wander point
 
+    public bool stillstanding = false;
+
     public GameObject projectilePrefab; // Projectile to be shot at the player
     public Transform projectileSpawnPoint; // Spawn point of the projectile
     public float shootCooldown = 3.0f; // Minimum time between shots
@@ -68,7 +70,7 @@ public class RangedEnemyController : MonoBehaviour
     }
 
     void Wander()
-    {
+    { 
         timer += Time.deltaTime;
 
         if (timer >= wanderTimer)
@@ -86,6 +88,7 @@ public class RangedEnemyController : MonoBehaviour
         {
             timer = wanderTimer; // Reset the timer when the destination is reached
         }
+    
     }
 
     void SetNewWanderPoint()
@@ -146,7 +149,7 @@ public class RangedEnemyController : MonoBehaviour
     {
         agent.enabled = false;
         rb.isKinematic = false;
-        Debug.Log("Applying pushback force: " + force);
+//        Debug.Log("Applying pushback force: " + force);
         rb.AddForce(force, ForceMode.Impulse);
         StartCoroutine(RecoverFromPushback());
     }

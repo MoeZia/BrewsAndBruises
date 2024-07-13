@@ -158,8 +158,9 @@ public class InputControllerDiab : MonoBehaviour
             {
                 // Handle other weapon attacks here
                 float requiredStamina = 10f; // Default stamina usage
-                if (staminaHUD.UseStamina(requiredStamina))
+                if (combatModel.GetCurrentWeapon() == CombatModel.WeaponType.Mug)
                 {
+                    if(staminaHUD.UseStamina(requiredStamina)){
                     // Determine target position from mouse click
                     Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray2, out RaycastHit hit, 100))
@@ -170,9 +171,17 @@ public class InputControllerDiab : MonoBehaviour
 
                     OnAttack?.Invoke();
                 }
-                else
+                }
+                else if (combatModel.GetCurrentWeapon() == CombatModel.WeaponType.Breze)
                 {
-                    Debug.Log("Not enough stamina to attack!");
+                    Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray2, out RaycastHit hit, 100))
+                    {
+                        Vector3 direction = (hit.point - transform.position).normalized;
+                        RotateTowards(direction); // Rotate towards the target position on attack
+                    }
+
+                    OnAttack?.Invoke();
                 }
             }
         }

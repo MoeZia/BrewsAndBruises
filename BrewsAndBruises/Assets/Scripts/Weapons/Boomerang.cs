@@ -14,12 +14,14 @@ public class Boomerang : MonoBehaviour
 
     public float forcefactor = 12f;
     public int damgeAmount = 15;
-    public float staminaCost = 34f; // Stamina cost for throwing the boomerang
+    public float staminaCost = 24f; // Stamina cost for throwing the boomerang
 
     private Vector3 initialLocalPosition;
     private Quaternion initialLocalRotation;
 
     private StaminaHUD staminaHUD; // Reference to the StaminaHUD
+
+    private float maxDistance = 10f;
 
     void Start()
     {
@@ -31,12 +33,16 @@ public class Boomerang : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isFlying && staminaHUD.UseStamina(staminaCost))
+        if (Input.GetMouseButtonDown(0) && !isFlying &&IsInRange(GetMouseWorldPosition()))
+
         {
+            if(staminaHUD.UseStamina(staminaCost)){
             // Calculate target position in world space
             targetPosition = GetMouseWorldPosition();
+            
             isFlying = true;
             transform.SetParent(null); // Detach from hand to move freely
+            }
         }
 
         if (isFlying)
@@ -113,5 +119,8 @@ public class Boomerang : MonoBehaviour
     private void ReturnToHand()
     {
         isReturning = true;
+    }
+    public bool IsInRange(Vector3 target){
+        return Vector3.Distance(target,transform.position) < maxDistance;
     }
 }
