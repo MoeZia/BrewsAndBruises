@@ -75,6 +75,7 @@ public class CombatController : MonoBehaviour {
             }
             EnemyController enemy = hitCollider.GetComponent<EnemyController>();
             RangedEnemyController rangedEnemy = hitCollider.GetComponent<RangedEnemyController>();
+            ChargingEnemyController charger = hitCollider.GetComponent<ChargingEnemyController>();
             if (enemy != null) {
         Vector3 pushDirection = (hitCollider.transform.position - transform.position).normalized;
         float pushForce = combatModel.GetAttackForce(); // Assuming this returns the force based on the weapon
@@ -85,6 +86,12 @@ public class CombatController : MonoBehaviour {
             float pushForce = combatModel.GetAttackForce(); 
             rangedEnemy.ApplyPushback(pushDirection * pushForce);
         }
+        if(charger != null) {
+            Vector3 pushDirection = (hitCollider.transform.position - transform.position).normalized;
+            float pushForce = combatModel.GetAttackForce(); 
+            charger.ApplyPushback(pushDirection * pushForce);
+        }
+        
         }
        
     }
