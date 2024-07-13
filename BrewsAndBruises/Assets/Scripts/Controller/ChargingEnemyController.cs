@@ -41,41 +41,40 @@ public class ChargingEnemyController : MonoBehaviour
         rb.isKinematic = true; // Start with Rigidbody in kinematic mode if using NavMesh
 
         animationController.RegisterAnimation("Walk", false);
-        animationController.RegisterAnimation("Charge", true);
+        animationController.RegisterAnimation("Charge", false);
         animationController.RegisterAnimation("BeingHit", true);
     }
 
     void Update()
     { 
-        while (!CorRunning)
-        {
+        
             
     
         float distance = Vector3.Distance(player.position, transform.position);
 
-        if (isCharging)
+        if (isCharging&& !CorRunning)
         {
             ChargeAtPlayer();
         }
         else if (distance <= lookRadius)
         {
-            if (distance > stopDistance)
+            if (distance > stopDistance&& !CorRunning)
             {
                 ChasePlayer();
             }
             else
             {
-                if (!isWaiting)
+                if (!isWaiting&& !CorRunning)
                 {
                     StartCoroutine(WaitBeforeCharge());
                 }
             }
         }
-        else
+        else if (!CorRunning)
         {
             Wander();
         }
-    }}
+    }
 
     void ChasePlayer()
     {
