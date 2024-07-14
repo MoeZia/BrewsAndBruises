@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -246,6 +246,54 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: intro
     clip: {fileID: 8300000, guid: 288c473e306f84560a0b35aef1c7cc4e, type: 3}
+    volume: 2.14
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: jake_way
+    clip: {fileID: 8300000, guid: c2b4e548e13e6594084b3b85fe58689e, type: 3}
+    volume: 2.14
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: jake_food
+    clip: {fileID: 8300000, guid: 715350734ef529248ae3fc4da32c7cf7, type: 3}
+    volume: 2.14
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: jake_barell
+    clip: {fileID: 8300000, guid: 531cdc9387783924f8cb9ceaf618f6be, type: 3}
+    volume: 2.14
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: jake_difficult
+    clip: {fileID: 8300000, guid: 67d9664eece85ea48aaf5a3d8aee50f4, type: 3}
+    volume: 2.14
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: jake_zombies
+    clip: {fileID: 8300000, guid: 8479ea038d96bfb45898dbd575d9437b, type: 3}
+    volume: 2.14
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: jake_run
+    clip: {fileID: 8300000, guid: c7b06a3e28c649444ae84cd724b78f7e, type: 3}
+    volume: 2.14
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: "jake_k\xE4fer"
+    clip: {fileID: 8300000, guid: 11b00444afd63a14aa8a1601e3221cac, type: 3}
+    volume: 2.14
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: jake_drink
+    clip: {fileID: 8300000, guid: 9f7928b7ab4964c48877c460461b0985, type: 3}
     volume: 2.14
     pitch: 1
     loop: 0

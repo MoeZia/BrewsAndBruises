@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public float maxStamina = 100f;
     private float currentHealth;
     private float currentStamina;
-    public float moveSpeed = 5f;
+    public float moveSpeed = 9f;
 
     private bool isSpeedBoostActive = false;
     private float originalMoveSpeed;
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isSpeedBoostActive)
         {
-            originalMoveSpeed = moveSpeed;
+            originalMoveSpeed = 9f;
             moveSpeed *= speedMultiplier;
             isSpeedBoostActive = true;
             speedBoostEndTime = Time.time + duration;
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         moveSpeed = originalMoveSpeed;
         isSpeedBoostActive = false;
-        inputController.UpdateMoveSpeed(moveSpeed);
+        inputController.UpdateMoveSpeed(9f);
         Debug.Log("Speed boost ended. Move speed reset to " + moveSpeed);
     }
 

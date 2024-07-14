@@ -28,8 +28,9 @@ public class TriggerZone : MonoBehaviour
         if(other.tag == "Player" && !isTriggered)
         {
             isTriggered = true;
-            
+
             // Play audio and activate child objects
+            audioManager.Stop("intro");
             audioManager.Play(audioClipName);
             foreach(Transform child in transform)
             {

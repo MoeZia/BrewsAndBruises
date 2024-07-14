@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpType: 0
-  powerUpValue: 20
+  powerUpValue: 50
   speedDuration: 5
 --- !u!65 &4948486459258249063
 BoxCollider:

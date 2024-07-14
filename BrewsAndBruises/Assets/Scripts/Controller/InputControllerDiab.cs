@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class InputControllerDiab : MonoBehaviour
 {
-    public float moveSpeed = 5.0f; // Adjusted for faster movement
+    public float moveSpeed = 9.0f; // Adjusted for faster movement
     public float jumpForce = 5.0f;
     public float rotationSpeed = 1000.0f; // Faster rotation to instantly face the direction
     private Rigidbody rb;

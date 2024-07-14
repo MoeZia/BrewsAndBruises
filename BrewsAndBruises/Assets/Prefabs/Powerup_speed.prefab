@@ -119,5 +119,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpType: 2
-  powerUpValue: 3
-  speedDuration: 10
+  powerUpValue: 4
+  speedDuration: 6
