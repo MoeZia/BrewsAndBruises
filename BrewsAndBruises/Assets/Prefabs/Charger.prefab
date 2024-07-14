@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90440ebdd9ca1694ebbe666d40427d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 90
   currentHealth: 0
   id: 
   OnHealthChanged:
@@ -500,6 +500,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   healthBar: {fileID: 7405495038493951819}
+  deathEffectPrefab: {fileID: 1753776141928924, guid: 045d5fbbf8161ea478959fe3c8e41207, type: 3}
 --- !u!195 &7621931420885163454
 NavMeshAgent:
   m_ObjectHideFlags: 0

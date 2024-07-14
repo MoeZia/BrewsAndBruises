@@ -120,3 +120,6 @@ MonoBehaviour:
   powerUpType: 1
   powerUpValue: 50
   speedDuration: 5
+  healthEffectPrefab: {fileID: 0}
+  staminaEffectPrefab: {fileID: 1599718021928974, guid: 21461e6c060baf044ac3e717ed4170cb, type: 3}
+  speedEffectPrefab: {fileID: 0}

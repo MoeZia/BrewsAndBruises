@@ -4,22 +4,16 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
-    
-    [SerializeField]private int currentHealth;
-
-    
+    [SerializeField] private int currentHealth;
     public string id;
-
     public UnityEvent<string, int, int> OnHealthChanged;
-
-
     public UnityEvent<string> OnDeath;
+    [SerializeField] private HealthBarScript healthBar;
 
-    [SerializeField] HealthBarScript healthBar;
+    [SerializeField] private GameObject deathEffectPrefab;  // Reference to your particle system prefab
 
     void Start()
     {
-        // Generate a unique identifier if not set
         if (string.IsNullOrEmpty(id))
         {
             id = System.Guid.NewGuid().ToString();
@@ -39,7 +33,7 @@ public class Health : MonoBehaviour
     {
         currentHealth -= damage;
         OnHealthChanged?.Invoke(id, currentHealth, maxHealth);
-      Debug.Log(healthBar);
+        Debug.Log(healthBar);
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
@@ -52,7 +46,6 @@ public class Health : MonoBehaviour
     {
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
         OnHealthChanged?.Invoke(id, currentHealth, maxHealth);
-
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
@@ -60,16 +53,20 @@ public class Health : MonoBehaviour
     {
         OnDeath?.Invoke(id);
         Debug.Log(gameObject.name + " died");
-        // destroy the game object !!! change this to a death animation or something ..... 
+        
+        // Instantiate the death effect before destroying the object
+        if (deathEffectPrefab != null)
+        {
+            Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 
     private void initAndUpdateHealthBar(float currentHealth, float maxHealth) {
-
         if(gameObject.CompareTag("Player")) {
             healthBar = GameObject.FindGameObjectsWithTag("HealthBar")[0].GetComponent<HealthBarScript>();
         } else {
-            // is enemy   
             healthBar = GetComponentInChildren<HealthBarScript>();
         }
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
@@ -84,6 +81,7 @@ public class Health : MonoBehaviour
     {
         return maxHealth;
     }
+
     public string GetID()
     {
         return id;

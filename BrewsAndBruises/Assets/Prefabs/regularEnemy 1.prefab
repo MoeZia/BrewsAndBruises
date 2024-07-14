@@ -1431,7 +1431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90440ebdd9ca1694ebbe666d40427d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
+  maxHealth: 45
   currentHealth: 0
   id: 
   OnHealthChanged:
@@ -1441,6 +1441,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   healthBar: {fileID: 5891531606643407399}
+  deathEffectPrefab: {fileID: 1753776141928924, guid: 045d5fbbf8161ea478959fe3c8e41207, type: 3}
 --- !u!1 &8112399920808697364
 GameObject:
   m_ObjectHideFlags: 0

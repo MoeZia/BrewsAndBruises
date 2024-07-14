@@ -99,6 +99,9 @@ MonoBehaviour:
   powerUpType: 0
   powerUpValue: 50
   speedDuration: 5
+  healthEffectPrefab: {fileID: 1599718021928974, guid: 21461e6c060baf044ac3e717ed4170cb, type: 3}
+  staminaEffectPrefab: {fileID: 0}
+  speedEffectPrefab: {fileID: 0}
 --- !u!65 &4948486459258249063
 BoxCollider:
   m_ObjectHideFlags: 0

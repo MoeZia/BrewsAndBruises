@@ -797,7 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90440ebdd9ca1694ebbe666d40427d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
+  maxHealth: 30
   currentHealth: 0
   id: 
   OnHealthChanged:
@@ -807,6 +807,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   healthBar: {fileID: 0}
+  deathEffectPrefab: {fileID: 1753776141928924, guid: 045d5fbbf8161ea478959fe3c8e41207, type: 3}
 --- !u!114 &4742947684903079962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,6 +824,7 @@ MonoBehaviour:
   chaseSpeed: 5
   wanderRadius: 15
   wanderTimer: 5
+  stillstanding: 0
   projectilePrefab: {fileID: 2372079314346306545, guid: 5113739d86c0c4d4b9fae4176168005b, type: 3}
   projectileSpawnPoint: {fileID: 2048909459304340825}
   shootCooldown: 5
