@@ -44,7 +44,7 @@ public class InputControllerDiab : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         HandleCombatInput();
         HandleMovementInput();

@@ -28,7 +28,7 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    void LateUpdate()
+    void Update()
     {
         if (!isFollowingPath)
         {

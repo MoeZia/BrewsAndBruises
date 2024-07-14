@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -39845,12 +39845,8 @@ MonoBehaviour:
   offset: {x: -19.5, y: 12.5, z: 4.5}
   smoothSpeed: 10.73
   pathPoints:
-  - {fileID: 988524506}
-  - {fileID: 1967730063}
-  - {fileID: 2081556643}
-  - {fileID: 1213022935}
-  - {fileID: 815222156}
-  pathTraversalTime: 60
+  - {fileID: 1564569212}
+  pathTraversalTime: 1
 --- !u!81 &1623607056
 AudioListener:
   m_ObjectHideFlags: 0
@@ -40672,13 +40668,7 @@ MonoBehaviour:
   prefabsToSpawn:
   - {fileID: 7953308258133957153, guid: ed42d5086a5a181429b988815840688c, type: 3}
   - {fileID: 3008056876428004493, guid: bba888cdaf6408f42a27773f5a1333de, type: 3}
-  Spawnpoints:
-  - {fileID: 1564569211}
-  - {fileID: 1462798851}
-  - {fileID: 1967730062}
-  - {fileID: 2081556642}
-  - {fileID: 815222155}
-  - {fileID: 1213022934}
+  Spawnpoints: []
   prefabIndex: 0
   spawnPoint: {x: 20, y: 0, z: 170}
   gridDimension: 5

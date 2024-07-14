@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
         spawnPoint = new Vector3(x+ 200, 0, z );
         prefabSpawner.SpawnPrefabGridFromIndex(prefabint, gridDimension, spawnPoint);
         prefabSpawner.SpawnPrefabGridFromIndex(1, 3, spawnPoint);
-        */
+        
 
         prefabSpawner = GetComponent<PrefabSpawner>();
 
@@ -51,7 +51,7 @@ public class GameController : MonoBehaviour
         prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,2,4);
         prefabSpawner.SpawnPrefabGridFromIndexwithSpawnPointIndex(1,2,5);
        
-       
+       */
 
 
         FindObjectOfType<AudioManager>().Play("BackgroundMusic");
