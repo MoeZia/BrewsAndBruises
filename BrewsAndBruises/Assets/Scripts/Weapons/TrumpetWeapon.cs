@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class TrumpetWeapon : MonoBehaviour
 {
-    public float attackDuration = 1.0f;
+    public float attackDuration = 3.0f; // Attack lasts for 3 seconds
     public float staminaCostPerSecond = 34f;
     public float pushBackForce = 10f;
     public int damage = 1;
     public float attackRange = 5f;
 
     private bool isAttacking = false;
+    private float attackTimer = 0f;
     private StaminaHUD staminaHUD;
     private AudioManager audioManager;
 
@@ -22,30 +23,30 @@ public class TrumpetWeapon : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && !isAttacking && staminaHUD.UseStamina(staminaCostPerSecond * Time.deltaTime))
+        if (Input.GetButtonDown("Fire1") && !isAttacking && staminaHUD.currentStamina > 10)
         {
             StartAttack();
-        }
-        else if (!Input.GetButton("Fire1"))
-        {
-            StopAttack();
         }
 
         if (isAttacking)
         {
-            if (!staminaHUD.UseStamina(staminaCostPerSecond * Time.deltaTime))
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer >= attackDuration || !staminaHUD.UseStamina(staminaCostPerSecond * Time.deltaTime))
             {
                 StopAttack();
             }
+
             ApplyDamageAndPushBack();
         }
     }
 
     public void StartAttack()
     {
-        if (!isAttacking&& staminaHUD.currentStamina > 10)
+        if (!isAttacking)
         {
             isAttacking = true;
+            attackTimer = 0f; // Reset the attack timer
             // Add visual/audio effects for starting the attack
             audioManager.Play("trumpet");
         }
@@ -56,6 +57,7 @@ public class TrumpetWeapon : MonoBehaviour
         if (isAttacking)
         {
             isAttacking = false;
+            attackTimer = 0f; // Reset the attack timer
             // Add visual/audio effects for stopping the attack
             audioManager.Stop("trumpet");
         }

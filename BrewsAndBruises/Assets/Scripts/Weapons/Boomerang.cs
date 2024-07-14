@@ -21,7 +21,7 @@ public class Boomerang : MonoBehaviour
 
     private StaminaHUD staminaHUD; // Reference to the StaminaHUD
 
-    private float maxDistance = 10f;
+    private float maxDistance = 20f;
 
     void Start()
     {

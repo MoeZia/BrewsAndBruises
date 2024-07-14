@@ -44,7 +44,7 @@ public class InputControllerDiab : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         HandleCombatInput();
         HandleMovementInput();
@@ -157,7 +157,7 @@ public class InputControllerDiab : MonoBehaviour
             else
             {
                 // Handle other weapon attacks here
-                float requiredStamina = 10f; // Default stamina usage
+                float requiredStamina = 7f; // Default stamina usage
                 if (combatModel.GetCurrentWeapon() == CombatModel.WeaponType.Mug)
                 {
                     if(staminaHUD.UseStamina(requiredStamina)){

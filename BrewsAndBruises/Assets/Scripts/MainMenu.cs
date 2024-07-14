@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     {
         // Überprüfe die aktuelle Szene
         Scene currentScene = SceneManager.GetActiveScene();
+        FindObjectOfType<AudioManager>().Stop("intro");
 
         // Wenn die aktuelle Szene "Lose" ist, starte die Coroutine
         if (currentScene.name == "Lose")
@@ -20,7 +21,7 @@ public class MainMenu : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("applaus");
             StartCoroutine(PlayMenuWithDelay(7f));
         }
-        else
+        if (currentScene.name == "GameMenu")
         {
             // In anderen Szenen sofort abspielen
             FindObjectOfType<AudioManager>().Play("menu");
@@ -40,6 +41,7 @@ public class MainMenu : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("click");
         FindObjectOfType<AudioManager>().Stop("menu");
+        FindObjectOfType<AudioManager>().Play("intro");
         FindObjectOfType<AudioManager>().Play("BackgroundMusic");
         FindObjectOfType<AudioManager>().Play("BackgroundPeople");
 

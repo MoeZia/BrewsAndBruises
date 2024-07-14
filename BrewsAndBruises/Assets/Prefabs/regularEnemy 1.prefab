@@ -1413,9 +1413,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd69576cbdcc3548b1d015bf3c7de0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 30.8
+  lookRadius: 15
   chaseSpeed: 5
-  wanderRadius: 20
+  wanderRadius: 5
   wanderTimer: 1
   attackRange: 2.33
   damage: 10

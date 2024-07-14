@@ -397,6 +397,7 @@
 "Assets/Scripts/WeaponUI.cs"
 "Assets/Scripts/WeaponUIController.cs"
 "Assets/StaminaHUD.cs"
+"Assets/TriggerZone.cs"
 -langversion:9.0
 
 /deterministic
