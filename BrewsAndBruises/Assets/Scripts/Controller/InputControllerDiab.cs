@@ -187,7 +187,7 @@ public class InputControllerDiab : MonoBehaviour
         }
         else if (!Input.GetMouseButton(0) && combatModel.GetCurrentWeapon() == CombatModel.WeaponType.Trumpet)
         {
-            trumpetWeapon.StopAttack(); // Stop attack for trumpet
+            //trumpetWeapon.StopAttack(); // Stop attack for trumpet
         }
     }
 

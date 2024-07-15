@@ -27,10 +27,7 @@ public class BarrelController : MonoBehaviour
         {
             health.OnHealthChanged.RemoveListener(OnHealthChanged);  // Clean up listener on destroy
         }
-        FindObjectOfType<AudioManager>().Stop("BackgroundMusic");
-        FindObjectOfType<AudioManager>().Stop("BackgroundPeople");
-        //load scene after 5 seconds
-        SceneManager.LoadSceneAsync("Win");
+        
         //SceneManager.LoadSceneAsync("Win", );
     }
 

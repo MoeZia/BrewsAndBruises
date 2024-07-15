@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+
 public class CameraFollow : MonoBehaviour
 {
     public Transform target; // The player's transform
@@ -11,28 +12,23 @@ public class CameraFollow : MonoBehaviour
 
     private int currentPathIndex = 0; // Index of the current path point
     private bool isFollowingPath = true; // Flag to check if the camera is following the path
-      float totalTime = 0f;
+    float totalTime = 0f;
 
     void Start()
     {
         if (pathPoints.Length > 0)
         {
-            Vector3 desiredPosition = target.position + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        transform.position = smoothedPosition;
-
-        // Keep the camera looking at the player
-        transform.LookAt(target);
-        
             StartCoroutine(FollowPath());
+            gameObject.GetComponentInChildren<Canvas>().enabled = false;
         }
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (!isFollowingPath)
         {
             FollowTarget();
+            gameObject.GetComponentInChildren<Canvas>().enabled = true;
         }
     }
 
@@ -43,23 +39,25 @@ public class CameraFollow : MonoBehaviour
         {
             Vector3 startPosition = transform.position;
             Vector3 endPosition = pathPoints[currentPathIndex].position + offset;
+            Quaternion startRotation = transform.rotation;
+            Quaternion endRotation = Quaternion.LookRotation(pathPoints[currentPathIndex].position - transform.position);
             float elapsedTime = 0f;
 
             while (elapsedTime < pathTraversalTime / pathPoints.Length)
             {
                 transform.position = Vector3.Lerp(startPosition, endPosition, (elapsedTime * pathPoints.Length) / pathTraversalTime);
-                transform.LookAt(endPosition);
+                transform.rotation = Quaternion.Lerp(startRotation, endRotation, (elapsedTime * pathPoints.Length) / pathTraversalTime);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
             transform.position = endPosition;
+            transform.rotation = endRotation;
             currentPathIndex++;
         }
 
         isFollowingPath = false; // Path traversal completed
     }
-
     void FollowTarget()
     {
         Vector3 desiredPosition = target.position + offset;

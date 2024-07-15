@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     int prefabint = 0;
     int gridDimension = 9;
 
+    public GameObject goal;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,5 +68,26 @@ public class GameController : MonoBehaviour
     void Update()
     {
         
+    }
+    void LateUpdate(){
+        if(goal == null){
+            // wait for 3 seconds before loading the win scene
+            // find all game objects with tag "Enemy" and destroy them
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(GameObject enemy in enemies){
+                enemy.GetComponent<Health>().Die();
+            }
+
+            StartCoroutine(LoadWinScene());
+
+
+        }
+    }
+    private IEnumerator LoadWinScene()
+    {
+        yield return new WaitForSeconds(5);
+        FindObjectOfType<AudioManager>().Stop("BackgroundMusic");
+        FindObjectOfType<AudioManager>().Stop("BackgroundPeople");
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("Win");
     }
 }

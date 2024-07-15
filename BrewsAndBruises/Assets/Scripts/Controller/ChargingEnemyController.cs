@@ -19,9 +19,9 @@ public class ChargingEnemyController : MonoBehaviour
     private Health health;
 
     private bool isCharging = false;
-
     private bool CorRunning = false;
     private bool isWaiting = false;
+    private float lastHit = 0;
 
     private AudioManager audioManager;
 
@@ -42,29 +42,26 @@ public class ChargingEnemyController : MonoBehaviour
 
         animationController.RegisterAnimation("Walk", false);
         animationController.RegisterAnimation("Charge", false);
-        animationController.RegisterAnimation("BeingHit", true);
+        animationController.RegisterAnimation("BeeingHit", true);
     }
 
     void Update()
     { 
-        
-            
-    
         float distance = Vector3.Distance(player.position, transform.position);
 
-        if (isCharging&& !CorRunning)
+        if (isCharging && !CorRunning)
         {
             ChargeAtPlayer();
         }
         else if (distance <= lookRadius)
         {
-            if (distance > stopDistance&& !CorRunning)
+            if (distance > stopDistance && !CorRunning)
             {
                 ChasePlayer();
             }
             else
             {
-                if (!isWaiting&& !CorRunning)
+                if (!isWaiting && !CorRunning)
                 {
                     StartCoroutine(WaitBeforeCharge());
                 }
@@ -115,30 +112,35 @@ public class ChargingEnemyController : MonoBehaviour
     {
         if (isCharging)
         {
-            if (collision.gameObject.CompareTag("Player"))
-            // 
+            
+
+            if (collision.gameObject.CompareTag("Player")&&Time.time-lastHit>2f) // Check if the object is the player
             {
-                //check if player is in front of the enemy
+                // Check if player is in front of the enemy
                 Vector3 direction = collision.transform.position - transform.position;
                 float angle = Vector3.Angle(direction, transform.forward);
+                Debug.Log(angle);
                 if (angle > 90)
                 {
                     return;
-                }else{
-                Health playerHealth = collision.gameObject.GetComponent<Health>();
-                if (playerHealth != null && collision.gameObject.GetComponent<InputControllerDiab>().isBlocking == false)
-                {
-                    playerHealth.TakeDamage(chargeDamage);
-                    collision.gameObject.GetComponent<PlayerController>().KnockBackForce(transform.forward * 222);
                 }
                 else
                 {
-                    collision.gameObject.GetComponent<PlayerController>().KnockBackForce(transform.forward * 222);
-                }
+                    lastHit = Time.time;
+                    Health playerHealth = collision.gameObject.GetComponent<Health>();
+                    if (playerHealth != null && collision.gameObject.GetComponent<InputControllerDiab>().isBlocking == false)
+                    {
+                        playerHealth.TakeDamage(chargeDamage);
+                        collision.gameObject.GetComponent<PlayerController>().KnockBackForce(transform.forward * 100);
+                    }
+                    else
+                    {
+                        collision.gameObject.GetComponent<PlayerController>().KnockBackForce(transform.forward * 100);
+                    }
 
-                isCharging = false; // Stop charging after hitting the player
-                animationController.TriggerAnimation("Walk"); // Resume walking animation
-            }
+                    isCharging = false; // Stop charging after hitting the player
+                    StartCoroutine(HandleCollision());
+                }
             }
             else
             {
@@ -149,26 +151,33 @@ public class ChargingEnemyController : MonoBehaviour
         }
     }
 
+    IEnumerator HandleCollision()
+    {
+        agent.isStopped = true;
+        animationController.TriggerAnimation("BeeingHit");
+        yield return new WaitForSeconds(3f);
+        animationController.TriggerAnimation("Walk");
+        agent.isStopped = false;
+    }
+
     public void ApplyPushback(Vector3 force)
     {
         agent.enabled = false;
         rb.isKinematic = false;
         rb.AddForce(force, ForceMode.Impulse);
-        Coroutine a = StartCoroutine(RecoverFromPushback());
+        isCharging = false; // Stop charging if currently charging
         
-
+        Coroutine a = StartCoroutine(RecoverFromPushback());
     }
 
     private IEnumerator RecoverFromPushback()
     {
-        CorRunning = true;
-        yield return new WaitForSeconds(0.5f); // Wait for the effects of the pushback to dissipate
-
-        animationController.TriggerAnimation("BeingHit"); // Trigger being hit animation
-
-        yield return new WaitForSeconds(1.5f); // Additional recovery time
-        CorRunning = false;
-
+        agent.isStopped = true;
+        animationController.TriggerAnimation("BeeingHit");
+        yield return new WaitForSeconds(3f);
+        animationController.TriggerAnimation("Walk");
+        isCharging = false; // Stop charging if currently charging
+        agent.isStopped = false;
         ReenableNavMeshAgent();
     }
 

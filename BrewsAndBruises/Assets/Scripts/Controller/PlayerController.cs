@@ -208,12 +208,12 @@ public class PlayerController : MonoBehaviour
                     combatController.PerformAttack();
                     break;
                 case CombatModel.WeaponType.Breze:
-                    animationController.TriggerAnimation("Whip");
+                    //animationController.TriggerAnimation("Fist");
                     //audioManager.Play("brezel");
                     combatController.PerformAttack();
                     break;
                 case CombatModel.WeaponType.Trumpet:
-                    animationController.TriggerAnimation("Whip"); 
+                    animationController.TriggerAnimation("Trumpet"); 
                     combatController.PerformAttack();
                     break;
             }

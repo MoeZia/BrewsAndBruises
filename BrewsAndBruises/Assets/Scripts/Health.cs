@@ -49,7 +49,7 @@ public class Health : MonoBehaviour
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
-    private void Die()
+    public void Die()
     {
         OnDeath?.Invoke(id);
         Debug.Log(gameObject.name + " died");
