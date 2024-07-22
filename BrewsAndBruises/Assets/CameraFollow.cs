@@ -14,6 +14,9 @@ public class CameraFollow : MonoBehaviour
     private bool isFollowingPath = true; // Flag to check if the camera is following the path
     float totalTime = 0f;
 
+    public GameObject continueButton;
+    private bool continuePressed = false;
+
     void Start()
     {
         if (pathPoints.Length > 0)
@@ -35,7 +38,7 @@ public class CameraFollow : MonoBehaviour
     IEnumerator FollowPath()
     {
         totalTime = 0f;
-        while (currentPathIndex < pathPoints.Length)
+        while (currentPathIndex < pathPoints.Length && isFollowingPath)
         {
             Vector3 startPosition = transform.position;
             Vector3 endPosition = pathPoints[currentPathIndex].position + offset;
@@ -43,7 +46,7 @@ public class CameraFollow : MonoBehaviour
             Quaternion endRotation = Quaternion.LookRotation(pathPoints[currentPathIndex].position - transform.position);
             float elapsedTime = 0f;
 
-            while (elapsedTime < pathTraversalTime / pathPoints.Length)
+            while (elapsedTime < pathTraversalTime / pathPoints.Length )
             {
                 transform.position = Vector3.Lerp(startPosition, endPosition, (elapsedTime * pathPoints.Length) / pathTraversalTime);
                 transform.rotation = Quaternion.Lerp(startRotation, endRotation, (elapsedTime * pathPoints.Length) / pathTraversalTime);
@@ -66,5 +69,11 @@ public class CameraFollow : MonoBehaviour
 
         // Keep the camera looking at the player
         transform.LookAt(target);
+    }
+
+    public void SkipPath()
+    {
+        isFollowingPath = false;
+        continueButton.SetActive(false);
     }
 }

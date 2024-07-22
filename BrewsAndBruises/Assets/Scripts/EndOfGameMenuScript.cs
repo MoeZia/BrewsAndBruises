@@ -7,6 +7,9 @@ using TMPro;
 public class EndOfGameMenuScript : MonoBehaviour
 { 
     public GameObject gameOverMenu;
+    public GameObject tutorialFrame;
+    public GameObject tutorialButton;
+    public GameObject hud;
     
     void Start()
     {
@@ -19,6 +22,18 @@ public class EndOfGameMenuScript : MonoBehaviour
 
        gameOverMenu.SetActive(true);
         Time.timeScale = 0f;
+    }
+    public void ActivateTutorial()
+    {
+        tutorialFrame.SetActive(true);
+        tutorialButton.SetActive(false);
+        hud.SetActive(false);
+    }
+        public void DectivateTutorial()
+    {
+        tutorialFrame.SetActive(false);
+        tutorialButton.SetActive(true);
+        hud.SetActive(true);
     }
 
     public void RestartGame() {
