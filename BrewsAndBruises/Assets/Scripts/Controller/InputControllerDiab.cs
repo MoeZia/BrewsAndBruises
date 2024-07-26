@@ -29,6 +29,8 @@ public class InputControllerDiab : MonoBehaviour
     public GameObject mousePointer;
     private GameObject currentPointer;
 
+    private bool mugging = false;
+
     [SerializeField] private StaminaHUD staminaHUD; // Reference to the StaminaHUD
     [SerializeField] private TrumpetWeapon trumpetWeapon; // Reference to the TrumpetWeapon
 
@@ -161,6 +163,7 @@ public class InputControllerDiab : MonoBehaviour
                 if (combatModel.GetCurrentWeapon() == CombatModel.WeaponType.Mug)
                 {
                     if(staminaHUD.UseStamina(requiredStamina)){
+                        mugging = true;
                     // Determine target position from mouse click
                     Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray2, out RaycastHit hit, 100))
@@ -170,6 +173,7 @@ public class InputControllerDiab : MonoBehaviour
                     }
 
                     OnAttack?.Invoke();
+                    
                 }
                 }
                 else if (combatModel.GetCurrentWeapon() == CombatModel.WeaponType.Breze)
@@ -181,7 +185,7 @@ public class InputControllerDiab : MonoBehaviour
                         RotateTowards(direction); // Rotate towards the target position on attack
                     }
 
-                    OnAttack?.Invoke();
+                    //OnAttack?.Invoke();
                 }
             }
         }

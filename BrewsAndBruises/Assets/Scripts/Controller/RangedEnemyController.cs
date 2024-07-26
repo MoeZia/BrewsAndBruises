@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
-using UnityEditor.UI;
+
 
 public class RangedEnemyController : MonoBehaviour
 {

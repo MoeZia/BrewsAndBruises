@@ -22,6 +22,7 @@ public class Boomerang : MonoBehaviour
     private StaminaHUD staminaHUD; // Reference to the StaminaHUD
 
     private float maxDistance = 20f;
+    private AnimationController animationController;
 
     void Start()
     {
@@ -29,21 +30,23 @@ public class Boomerang : MonoBehaviour
         initialLocalPosition = transform.localPosition;
         initialLocalRotation = transform.localRotation;
         staminaHUD = FindObjectOfType<StaminaHUD>(); // Find the StaminaHUD in the scene
+        animationController = GetComponentInParent<AnimationController>();
+        animationController.RegisterAnimation("Fist", true);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isFlying &&IsInRange(GetMouseWorldPosition()))
-
+        if (Input.GetMouseButtonDown(0) && !isFlying &&IsInRange(GetMouseWorldPosition()) && staminaHUD.currentStamina >= staminaCost)
         {
             if(staminaHUD.UseStamina(staminaCost)){
             // Calculate target position in world space
             targetPosition = GetMouseWorldPosition();
-            
+            animationController.TriggerAnimation("Fist"); 
             isFlying = true;
             transform.SetParent(null); // Detach from hand to move freely
             }
         }
+
 
         if (isFlying)
         {

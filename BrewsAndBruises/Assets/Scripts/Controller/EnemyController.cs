@@ -135,7 +135,11 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        agent.isStopped = false; // Allow the agent to resume moving
+        if (agent.enabled && agent.isOnNavMesh)
+        {
+           agent.isStopped = false; //agent.SetDestination(player.position); // Resume chasing the player
+        }
+        // Allow the agent to resume moving
     }
 
     private void AttackPlayer(Collider playerCollider)

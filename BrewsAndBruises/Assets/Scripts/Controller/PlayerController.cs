@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public float maxStamina = 100f;
     private float currentHealth;
     private float currentStamina;
-    public float moveSpeed = 9f;
+    public float moveSpeed = 25f;
 
     private bool isSpeedBoostActive = false;
     private float originalMoveSpeed;
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         animationController.RegisterAnimation("RotateLeft", false);
         animationController.RegisterAnimation("RotateRight", false);
         animationController.RegisterAnimation("BlockingLoop", true);
-        animationController.RegisterAnimation("Jump", true);
+        animationController.RegisterAnimation("JumpWhileRunning", true);
         animationController.RegisterAnimation("Idle", false);
         animationController.RegisterAnimation("Fist", true);
         animationController.RegisterAnimation("Trumpet", true);
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isSpeedBoostActive)
         {
-            originalMoveSpeed = 9f;
+            originalMoveSpeed = 25f;
             moveSpeed *= speedMultiplier;
             isSpeedBoostActive = true;
             speedBoostEndTime = Time.time + duration;
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         moveSpeed = originalMoveSpeed;
         isSpeedBoostActive = false;
-        inputController.UpdateMoveSpeed(9f);
+        inputController.UpdateMoveSpeed(25f);
         Debug.Log("Speed boost ended. Move speed reset to " + moveSpeed);
     }
 
@@ -154,8 +154,8 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log($"Player with ID {id} died");
         GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
-        audioManager.Stop("BackgroundMusic");
-        audioManager.Stop("BackgroundPeople");
+        //audioManager.Stop("BackgroundMusic");
+        //audioManager.Stop("BackgroundPeople");
         audioManager.Play("lose");
         SceneManager.LoadSceneAsync("Lose");
 
@@ -204,6 +204,7 @@ public class PlayerController : MonoBehaviour
                     break;
                     }
                     animationController.TriggerAnimation("Fist");
+                    
                     audioManager.Play("glassHit");
                     combatController.PerformAttack();
                     break;
